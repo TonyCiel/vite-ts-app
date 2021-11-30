@@ -5,14 +5,13 @@
 ```sh
 npm install
 # or
-yarn add
+yarn install
 ```
 
 ### 启动项目
 
 ```sh
 npm run dev
-```
 # or
 yarn dev
 ```
