@@ -1,0 +1,77 @@
+
+// 工具类函数
+@import './mixin.scss';
+// 常量
+@import './variables.scss';
+//滚动条样式
+@include scrollBar;
+div {
+	font-size: 14px;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+* {
+  outline: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
+/**常用样式，如flex布局，文字左右换行等等*/
+.flexlayout {
+	display: flex;
+}
+
+.flexlayout_flow {
+	flex-wrap: wrap;
+}
+.flexlayout_column {
+	flex-direction: column;
+}
+
+.flexitem_auto {
+	flex: 1;
+}
+
+.flexlayout_flow_vertical {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+}
+
+.flexlayout_horizontal {
+	justify-content: center;
+}
+
+.flexlayout_middle {
+	align-items: center;
+}
+
+.flexlayout_content_end {
+	justify-content: flex-end;
+}
+
+.al_center {
+	text-align: center;
+}
+
+.al_right {
+  text-align: right;
+}
+
+.al_left {
+  text-align: left;
+}
+
+.font_bold {
+	font-weight: bold;
+}
+.cursor {
+  cursor: pointer
+}

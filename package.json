@@ -1,0 +1,25 @@
+{
+  "name": "vite-ts-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "element-plus": "1.1.0-beta.9",
+    "mockjs": "^1.1.0",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.4",
+    "@vitejs/plugin-vue-jsx": "^1.2.0",
+    "sass": "^1.43.4",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
+  }
+}
