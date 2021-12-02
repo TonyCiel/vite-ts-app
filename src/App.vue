@@ -7,7 +7,7 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <div>
     <router-view #="{ Component, route }">
-      <component :is="Component" :key="route.path" />
+      <component :is="Component" />
     </router-view>
   </div>
 </template>

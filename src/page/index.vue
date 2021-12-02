@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-import { useStore } from 'vuex';
 import { defineComponent } from "vue";
 import cielMenu from "./menu/index.vue";
 export default defineComponent({
@@ -18,13 +17,7 @@ export default defineComponent({
     cielMenu,
   },
   setup() {
-    const store = useStore();
-    const reqRouteMenu = () => {
-      store.dispatch('GetMenuList');
-    }
-    reqRouteMenu();
     return {
-      reqRouteMenu
     }
   }
 });

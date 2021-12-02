@@ -7,21 +7,21 @@ const menus = [
         icon: 'el-icon-setting',
         children: [{
             name: '用户管理',
-            path: '/user',
+            path: 'user',
             id: '001',
             icon: 'el-icon-user',
             parentId: "00"
         },
         {
             name: '菜单管理',
-            path: '/menu',
+            path: 'menu',
             id: '002',
             icon: 'el-icon-tickets',
         }]
     },
     {
         name: '用户模块',
-        path: '/user/',
+        path: '/user',
         id: '01',
         icon: 'el-icon-star-off',
     },

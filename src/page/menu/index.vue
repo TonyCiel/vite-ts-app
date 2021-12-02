@@ -7,13 +7,17 @@
         text-color="#e5e5e5"
         active-text-color="white"
         :collapse="false"
+        @select="onRouteChange"
+        :default-active="activeRoute"
+        mode="vertical"
+        unique-opened
       >
         <menu-item
           v-for="item in menuList"
-          :key="item.path"
-          :index="item.path"
+          :parent="item"
+          :key="item.fullPath"
+          :index="item.fullPath"
           :menu="item"
-          first
           :props="menuProp"
           :collapse="false"
         ></menu-item>
@@ -24,6 +28,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import { useStore } from "vuex";
+import { useRoute,useRouter } from "vue-router";
 import logo from "./logo.vue";
 import MenuItem from "./menuItem.vue";
 export default defineComponent({
@@ -33,6 +38,8 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
     const menuList = computed(() => {
       return store.state.menu.menuList;
     });
@@ -44,10 +51,20 @@ export default defineComponent({
         children: "children",
       },
     });
-    // console.log
+    // 选中的路由
+    const activeRoute = computed(() => {
+      return route.path;
+    });
+    const onRouteChange = (e:any) => {
+      router.push({
+        path: e
+      })
+    }
     return {
       ...toRefs(state),
       menuList,
+      activeRoute,
+      onRouteChange
     };
   },
 });
