@@ -1,4 +1,10 @@
 ## 快速开始
+### 安装vite
+```sh
+npm init vite@latest
+# or
+yarn create vite
+```
 
 ### 安装依赖
 
