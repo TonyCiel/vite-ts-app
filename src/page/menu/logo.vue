@@ -10,7 +10,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: "管理平台",
+      default: "CielAdmin管理平台",
     },
   }
 });
