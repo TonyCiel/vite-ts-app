@@ -28,7 +28,7 @@
       <el-tooltip
         class="item"
         effect="dark"
-        content="全屏"
+        :content="!isFullscreen ? '全屏' : '退出全屏'"
         placement="bottom-start"
       >
         <i class="iconfont" @click="handleScreen" v-if="!isFullscreen"
@@ -170,7 +170,7 @@ export default defineComponent({
   .ciel-header__collapse {
     height: 64px;
     line-height: 64px;
-    width: 300px;
+    flex: 1;
     .el-breadcrumb {
       margin-left: 20px ;
     }

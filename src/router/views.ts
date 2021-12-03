@@ -16,7 +16,7 @@ export const formatRoute = (routes: Array<MenuItem>) => {
         if(!item.children) {
             router.push({
                 path: item.path,
-                component:  import(`../page/index.vue`),
+                component: () => import(`../page/index.vue`),
                 children: [{
                     name: item.name,
                     path: 'index',

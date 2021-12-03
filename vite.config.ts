@@ -8,7 +8,7 @@ const pathResolve = (pathStr: string) => {
 
 const config = {
   // publicPath:process.env.NODE_ENV === 'production'?`/admin-plat/`: '/',
-  base: process.env.NODE_ENV === 'production' ? '/admin-plat/' : '/',//在生产中服务时的基本公共路径。@default '/'
+  base: 'admin-plat',//在生产中服务时的基本公共路径。@default '/'
   resolve: {
     alias: {
       '/@': pathResolve('./src'),

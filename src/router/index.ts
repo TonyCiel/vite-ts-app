@@ -50,7 +50,7 @@ console.log(store.state.menu.allMenu)
 const asyncRoute = formatRoute(store.state.menu.menuList);
 console.log(asyncRoute)
 const route = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHashHistory('/admin-plat/'),
     routes: [...routes,...asyncRoute],
 })
 route.beforeEach((to:any, form: any) => {
@@ -64,7 +64,7 @@ route.beforeEach((to:any, form: any) => {
     }, 200)
     let name:string = to.meta.title || to.name || "";
     document.title = name;
-    // console.log(to,form);
+    console.log(to,form);
 })
 
 export default route
