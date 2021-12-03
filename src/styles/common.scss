@@ -3,6 +3,8 @@
 @import './mixin.scss';
 // 常量
 @import './variables.scss';
+// icon
+@import './icon.scss';
 //滚动条样式
 @include scrollBar;
 div {

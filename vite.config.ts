@@ -7,9 +7,12 @@ const pathResolve = (pathStr: string) => {
 }
 
 const config = {
-  base: './',//在生产中服务时的基本公共路径。@default '/'
-  alias: {
-    '/@': pathResolve('./src'),
+  // publicPath:process.env.NODE_ENV === 'production'?`/admin-plat/`: '/',
+  base: process.env.NODE_ENV === 'production' ? '/admin-plat/' : '/',//在生产中服务时的基本公共路径。@default '/'
+  resolve: {
+    alias: {
+      '/@': pathResolve('./src'),
+    },
   },
   plugins: [vue(),vueJsx()],
   outDir: 'dist',//构建输出将放在其中。会在构建之前删除旧目录。@default 'dist'

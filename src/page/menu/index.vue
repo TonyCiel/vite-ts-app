@@ -6,7 +6,6 @@
         background-color="#409eff"
         text-color="#e5e5e5"
         active-text-color="white"
-        :collapse="false"
         @select="onRouteChange"
         :default-active="activeRoute"
         mode="vertical"
@@ -18,6 +17,7 @@
           :key="item.fullPath"
           :index="item.fullPath"
           :menu="item"
+          first
           :props="menuProp"
           :collapse="false"
         ></menu-item>

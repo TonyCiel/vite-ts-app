@@ -13,6 +13,7 @@ const addRouteFullPath = (routes: Array<MenuItem>) => {
         item.fullPath = `${item.path}/index`
         if(item.children && item.children.length) {
             item.children.forEach(child => {
+                child.parentName =  item.name;
                 child.fullPath = `${item.path}${child.path}`
             })
         }
@@ -24,6 +25,7 @@ const addRouteFullPath = (routes: Array<MenuItem>) => {
 const memu = {
     state: {
         menuList: getStore('menu') || [],
+        allMenu: []
     },
     actions: {
         GetMenuList({ commit }) {
@@ -33,6 +35,7 @@ const memu = {
                     setStore("menu",routes)
                     // console.log('res',getStore('menu'));
                     commit('SET_MENULIST',routes)
+                    commit('SET_MENUALL',routes)
                     resolve(res)
                 })
             })
@@ -47,6 +50,21 @@ const memu = {
                 }
             })
             state.menuList = menu
+        },
+        // 把所有菜单提出来
+        SET_MENUALL(state, list: Array<MenuItem>) {
+            let menu = state.allMenu;
+            list.forEach(ele => {
+                // menu.push(ele);
+                if(ele.children && ele.children.length) {
+                    ele.children.forEach(child => {
+                        menu.push(child);
+                    })
+                } else {
+                    menu.push(ele);
+                }
+            })
+            state.allMenu = menu
         }
     }
 

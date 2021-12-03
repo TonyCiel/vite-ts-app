@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs ,computed,Ref,ref,onMounted} from "vue";
+import { defineComponent, reactive, toRefs ,computed,Ref,ref} from "vue";
 import {valideForm} from '../utils/formUtils';
 import { ElMessage } from 'element-plus';
 import {useRouter} from 'vue-router'

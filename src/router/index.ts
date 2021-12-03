@@ -3,7 +3,6 @@ import { ElLoading } from 'element-plus';
 import page from '../page/index.vue';
 import store from '../store/index';
 import { formatRoute } from './views'
-import { getStore } from '/@/utils/store';
 
 // 静态路由
 const routes: Array<RouteRecordRaw> = [
@@ -46,12 +45,15 @@ const routes: Array<RouteRecordRaw> = [
 
 ]
 // 加载动态路由
-await store.dispatch('GetMenuList')
+store.dispatch('GetMenuList')
+console.log(store.state.menu.allMenu)
+const asyncRoute = formatRoute(store.state.menu.menuList);
+console.log(asyncRoute)
 const route = createRouter({
     history: createWebHashHistory(),
-    routes: [...routes,...formatRoute(getStore("menu"))]
+    routes: [...routes,...asyncRoute],
 })
-route.beforeEach((to, form) => {
+route.beforeEach((to:any, form: any) => {
     let loading = ElLoading.service({
         lock: true,
         text: 'Loading',
@@ -60,7 +62,8 @@ route.beforeEach((to, form) => {
     setTimeout(() => {
         loading.close()
     }, 200)
-    document.title = to.meta.title || to.name;
+    let name:string = to.meta.title || to.name || "";
+    document.title = name;
     // console.log(to,form);
 })
 
