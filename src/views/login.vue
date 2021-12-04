@@ -73,7 +73,7 @@ export default defineComponent({
           return;
         }
         setStore("token", "ax1KywunnAmsp949Gyu","session")
-        ElMessage.success('登录成功');
+        ElMessage.success('欢迎回来～');
         router.push({
           path: '/wel/index'
         })

@@ -1,6 +1,6 @@
 <template>
   <div class="ciel-menu">
-    <el-scrollbar style="height: 100%; width: 240px">
+    <el-scrollbar style="height: 100%;">
       <logo></logo>
       <el-menu
         background-color="#409eff"
@@ -10,6 +10,7 @@
         :default-active="activeRoute"
         mode="vertical"
         unique-opened
+        :collapse="isCollapse"
       >
         <menu-item
           v-for="item in menuList"
@@ -41,7 +42,10 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
     const menuList = computed(() => {
-      return store.state.menu.menuList;
+      return store.getters.menuList;
+    });
+    const isCollapse = computed(() => {
+      return store.getters.collapse;
     });
     const state = reactive({
       menuProp: {
@@ -64,7 +68,8 @@ export default defineComponent({
       ...toRefs(state),
       menuList,
       activeRoute,
-      onRouteChange
+      onRouteChange,
+      isCollapse
     };
   },
 });

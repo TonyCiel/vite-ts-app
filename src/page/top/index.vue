@@ -1,7 +1,7 @@
 <template>
-  <header class="ciel-header flexlayout flexlayout_middle">
+  <header class="ciel-header flexlayout flexlayout_middle" :class="{'ciel-header--collapse': isCollapse}">
     <div class="ciel-header__collapse flexlayout flexlayout_middle">
-      <i class="el-icon-s-fold"></i>
+      <i :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="setCollapse"></i>
       <el-breadcrumb>
         <el-breadcrumb-item :to="{ path: '/wel/index' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item v-for="(item) in nowPageRouteName" :key="item" >{{item}}</el-breadcrumb-item>
@@ -69,6 +69,7 @@ import { useStore } from "vuex";
 import { useRouter,useRoute } from "vue-router";
 import { ElMessageBox, ElNotification } from "element-plus";
 import screenfull from "screenfull";
+import {clearStore} from "../../utils/store"
 export default defineComponent({
   components: { Search },
   setup() {
@@ -81,7 +82,7 @@ export default defineComponent({
     const route = useRoute();
     // 获取所有菜单
     const menus = computed(() => {
-      return store.state.menu.allMenu;
+      return store.getters.allMenu;
     });
     // 顶部导航搜索
     const querySearch = (keyword: string, cb) => {
@@ -103,6 +104,7 @@ export default defineComponent({
     // 退出登录
     const logout = () => {
       ElMessageBox.confirm("退出系统, 是否继续?").then(() => {
+        clearStore("token","session")
         router.push({ path: "/login" });
       });
     };
@@ -134,6 +136,14 @@ export default defineComponent({
         parent[0].parentName ? name.push(parent[0].name) : '';
       }
       return name
+    });
+    // 设置菜单的collapse
+    const setCollapse = () => {
+      let collapse:boolean = store.getters.collapse;
+      store.commit("SET_COLLAPSE", !collapse);
+    }
+    const isCollapse = computed(() => {
+      return store.getters.collapse
     })
     onMounted(() => screenfull.isEnabled && screenfull.on("change", change));
     onUnmounted(() => screenfull.isEnabled && screenfull.off("change", change));
@@ -144,7 +154,9 @@ export default defineComponent({
       onSelectPath,
       logout,
       handleScreen,
-      nowPageRouteName
+      nowPageRouteName,
+      setCollapse,
+      isCollapse
     };
   },
 });
@@ -160,6 +172,11 @@ export default defineComponent({
   width: calc(100vw - 240px);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
   background-color: white;
+  transition: all .4s;
+  &.ciel-header--collapse {
+    left: 65px;
+    width: calc(100vw - 65px);
+  }
   .ciel-header__search {
     flex: 1;
     :deep .el-input__inner {

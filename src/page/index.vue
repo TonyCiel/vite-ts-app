@@ -1,5 +1,5 @@
 <template>
-  <div class="ciel-page">
+  <div class="ciel-page" :class="{'ciel-page--collapse': isCollapse}">
     <!-- 菜单栏 -->
     <cielMenu></cielMenu>
     <cielTop></cielTop>
@@ -11,16 +11,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent,computed } from "vue";
 import cielMenu from "./menu/index.vue";
 import cielTop from "./top/index.vue";
+import { useStore } from "vuex";
 export default defineComponent({
   components: {
     cielMenu,
     cielTop
   },
   setup() {
+    const store = useStore();
+    const isCollapse = computed(() => {
+      return store.getters.collapse;
+    })
     return {
+      isCollapse
     }
   }
 });
@@ -29,8 +35,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .ciel-page {
     position: absolute;
-    right: 0;
+    left: 240px;
     width: calc(100vw - 240px);
     top: 64px;
+    transition: all .4s;
+    &.ciel-page--collapse {
+      width: calc(100vw - 65px);
+       left: 65px;
+    }
 }
 </style>

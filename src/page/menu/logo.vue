@@ -1,17 +1,27 @@
 <template>
-  <header class="ciel-logo">
-    <span class="ciel-logo--title">{{ title }}</span>
+  <header class="ciel-logo" :class="{'ciel-logo--collapse' : isCollapse}">
+    <span class="ciel-logo--title" v-show="!isCollapse">{{ title }}</span>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent,computed } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   props: {
     title: {
       type: String,
       default: "CielAdmin管理平台",
     },
+  },
+  setup() {
+    const store = useStore();
+    const isCollapse = computed(() => {
+      return store.getters.collapse;
+    });
+    return {
+      isCollapse
+    }
   }
 });
 </script>
@@ -30,8 +40,12 @@ export default defineComponent({
   box-sizing: border-box;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
   user-select: none; 
+  transition: all .4s;
+  &.ciel-logo--collapse {
+    width: 56px;
+    background-position: center;
+  }
   .ciel-logo--title {
       padding-left: 30px;
   }

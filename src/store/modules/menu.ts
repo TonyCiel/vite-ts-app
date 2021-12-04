@@ -25,7 +25,8 @@ const addRouteFullPath = (routes: Array<MenuItem>) => {
 const memu = {
     state: {
         menuList: getStore('menu') || [],
-        allMenu: []
+        allMenu: [],
+        collapse: false, // 菜单是否展开
     },
     actions: {
         GetMenuList({ commit }) {
@@ -55,7 +56,6 @@ const memu = {
         SET_MENUALL(state, list: Array<MenuItem>) {
             let menu = state.allMenu;
             list.forEach(ele => {
-                // menu.push(ele);
                 if(ele.children && ele.children.length) {
                     ele.children.forEach(child => {
                         menu.push(child);
@@ -65,6 +65,9 @@ const memu = {
                 }
             })
             state.allMenu = menu
+        },
+        SET_COLLAPSE(state,value:boolean) {
+            state.collapse = value
         }
     }
 
