@@ -1,7 +1,7 @@
 /**
  * 存储localStorage
  */
-export const setStore = (key: string, obj: object,type?: string) => {
+export const setStore = (key: string, obj: any,type?: string) => {
     key = `ciel-${key}`;
     if(type === 'session') {
         window.sessionStorage.setItem(key, JSON.stringify(obj));

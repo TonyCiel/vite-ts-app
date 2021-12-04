@@ -37,7 +37,8 @@
 import { defineComponent, reactive, toRefs ,computed,Ref,ref} from "vue";
 import {valideForm} from '../utils/formUtils';
 import { ElMessage } from 'element-plus';
-import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router';
+import { setStore } from "../utils/store"
 export default defineComponent({
   components: {
   },
@@ -71,6 +72,7 @@ export default defineComponent({
           ElMessage.error('密码错误！请重试');
           return;
         }
+        setStore("token", "ax1KywunnAmsp949Gyu","session")
         ElMessage.success('登录成功');
         router.push({
           path: '/wel/index'
