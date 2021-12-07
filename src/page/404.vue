@@ -6,13 +6,25 @@
       <h1>404</h1>
       <div class="desc">抱歉，你访问的页面不存在</div>
       <div class="actions">
-        <router-link :to="{path:'/wel/index'}">
+        <router-link :to="{path: homePage}">
           <el-button type="primary">返回首页</el-button>
         </router-link>
       </div>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import {defineComponent} from 'vue';
+import {homePage} from '../../env'
+export default defineComponent({
+  setup() {
+    return {
+      homePage
+    }
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 .error-page {

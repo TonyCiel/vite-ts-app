@@ -39,6 +39,7 @@ import {valideForm} from '../utils/formUtils';
 import { ElMessage } from 'element-plus';
 import {useRouter} from 'vue-router';
 import { setStore } from "../utils/store"
+import {homePage} from '../../env.js'
 export default defineComponent({
   components: {
   },
@@ -75,7 +76,7 @@ export default defineComponent({
         setStore("token", "ax1KywunnAmsp949Gyu","session")
         ElMessage.success('欢迎回来～');
         router.push({
-          path: '/wel/index'
+          path: homePage
         })
 
     }

@@ -3,7 +3,7 @@
     <div class="ciel-header__collapse flexlayout flexlayout_middle">
       <i :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="setCollapse"></i>
       <el-breadcrumb>
-        <el-breadcrumb-item :to="{ path: '/wel/index' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: homePage }">首页</el-breadcrumb-item>
         <el-breadcrumb-item v-for="(item) in nowPageRouteName" :key="item" >{{item}}</el-breadcrumb-item>
       </el-breadcrumb>
       <!-- <p>主页</p> -->
@@ -69,7 +69,8 @@ import { useStore } from "vuex";
 import { useRouter,useRoute } from "vue-router";
 import { ElMessageBox, ElNotification } from "element-plus";
 import screenfull from "screenfull";
-import {clearStore} from "../../utils/store"
+import {clearStore} from "../../utils/store";
+import {homePage} from '../../../env.js'
 export default defineComponent({
   components: { Search },
   setup() {
@@ -156,7 +157,8 @@ export default defineComponent({
       handleScreen,
       nowPageRouteName,
       setCollapse,
-      isCollapse
+      isCollapse,
+      homePage
     };
   },
 });
@@ -173,6 +175,7 @@ export default defineComponent({
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
   background-color: white;
   transition: all .4s;
+  z-index: 99;
   &.ciel-header--collapse {
     left: 65px;
     width: calc(100vw - 65px);

@@ -3,6 +3,7 @@
     <!-- 菜单栏 -->
     <cielMenu></cielMenu>
     <cielTop></cielTop>
+    <cielTags></cielTags>
     <div class="ciel-page-content">
       <router-view>
       </router-view>
@@ -14,11 +15,13 @@
 import { defineComponent,computed } from "vue";
 import cielMenu from "./menu/index.vue";
 import cielTop from "./top/index.vue";
+import cielTags from "./tags/index.vue";
 import { useStore } from "vuex";
 export default defineComponent({
   components: {
     cielMenu,
-    cielTop
+    cielTop,
+    cielTags
   },
   setup() {
     const store = useStore();
@@ -42,6 +45,13 @@ export default defineComponent({
     &.ciel-page--collapse {
       width: calc(100vw - 65px);
        left: 65px;
+    }
+    .ciel-page-content {
+      height: calc(100vh - 42px - 64px);
+      padding-top: 42px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: #f0f2f5;
     }
 }
 </style>

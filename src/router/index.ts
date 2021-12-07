@@ -56,7 +56,12 @@ const route = createRouter({
 })
 route.beforeEach((to:any, form: any,next) => {
     const isLogin = getStore("token","session") ? true : false;
-    console.log('isLogin',isLogin)
+    // 保存路由tag
+    console.log(store)
+    if(to.path !== '/login' && to.path !== '/') {
+        store.commit("ADD_TAG",to);
+    }
+    // console.log('isLogin',isLogin)
     if(!isLogin && to.path !== '/login' && to.path !== '/') {
         next({path: '/login'});
     }
