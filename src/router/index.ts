@@ -45,21 +45,27 @@ const routes: Array<RouteRecordRaw> = [
     }
 
 ]
-// 加载动态路由
-store.dispatch('GetMenuList')
-// console.log(store.state.menu.allMenu)
-const asyncRoute = formatRoute(store.getters.menuList);
-console.log(asyncRoute)
 const route = createRouter({
     history: createWebHashHistory('/admin-plat/'),
-    routes: [...routes,...asyncRoute],
+    routes: [...routes],
+});
+const updateRouters = () => {
+    let menu = formatRoute(store.getters.menuList);
+    for(let i = 0; i< menu.length; i++) {
+        route.addRoute(menu[i]);
+    }
+}
+// 加载动态路由
+store.dispatch('GetMenuList').then(res => {
+    updateRouters();
 })
 route.beforeEach((to:any, form: any,next) => {
     const isLogin = getStore("token","session") ? true : false;
     // 保存路由tag
-    console.log(store)
-    if(to.path !== '/login' && to.path !== '/') {
-        store.commit("ADD_TAG",to);
+    if(to.path !== '/login' && to.path !== '/' && to.path !== '/404') {
+        let tagValue = Object.assign({},to);
+        delete tagValue.matched
+        store.commit("ADD_TAG",tagValue);
     }
     // console.log('isLogin',isLogin)
     if(!isLogin && to.path !== '/login' && to.path !== '/') {
@@ -68,7 +74,7 @@ route.beforeEach((to:any, form: any,next) => {
     if(isLogin && to.path == "/") {
         next({path: '/wel/index'});
     }
-    console.log(next)
+    // console.log(next)
     let loading = ElLoading.service({
         lock: true,
         text: 'Loading',

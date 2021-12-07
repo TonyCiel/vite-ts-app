@@ -1,7 +1,12 @@
 <template>
-  <div class="ciel-nav" :class="{'ciel-nav--collapse': isCollapse}">
-    <!-- <div class="el-tabs__item" style="display:inline-block">首页</div> -->
-    <el-tabs v-model="tabValue" type="card" :closable="true" @tab-remove="removeTab">
+  <div class="ciel-nav" :class="{ 'ciel-nav--collapse': isCollapse }">
+    <el-tabs
+      @tab-click="handleClickTab"
+      v-model="tabValue"
+      type="card"
+      :closable="true"
+      @tab-remove="removeTab"
+    >
       <el-tab-pane :key="homePage" label="首页" :name="homePage"> </el-tab-pane>
       <el-tab-pane
         v-for="item in tagList"
@@ -30,26 +35,15 @@ export default defineComponent({
       return store.getters.tagList;
     });
     const isCollapse = computed(() => {
-      return store.getters.collapse
-    })
-    // 监听选中的tab变化
+      return store.getters.collapse;
+    });
+    // 监听路由变化
     watch(
-      () => tabValue.value,
-      (newval, val) => {
-        console.log('aaa')
-        let tags = tagList.value.filter((item) => {
-          return item.fullPath === newval;
-        });
-        router.push({
-          path: tags.length ? tags[0].path : homePage,
-          query: tags.length ? tags[0].query : {},
-        });
+      () => route.fullPath,
+      (val) => {
+        tabValue.value = val;
       }
     );
-    // 监听路由变化
-    watch(() => route.fullPath, (val) => {
-        tabValue.value = val;
-    })
     const removeTab = (target) => {
       store.commit("REMOVE_TAG", target);
       if (target === tabValue.value) {
@@ -58,12 +52,22 @@ export default defineComponent({
       }
       console.log("target", target);
     };
+    const handleClickTab = () => {
+      let tags = tagList.value.filter((item) => {
+        return item.fullPath === tabValue.value;
+      });
+      router.push({
+        path: tags.length ? tags[0].path : homePage,
+        query: tags.length ? tags[0].query : {},
+      });
+    };
     return {
       tagList,
       isCollapse,
       tabValue,
       removeTab,
       homePage,
+      handleClickTab,
     };
   },
 });
@@ -71,7 +75,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .ciel-nav {
-//   padding: 0 10px;
+  //   padding: 0 10px;
   box-sizing: border-box;
   user-select: none;
   position: relative;
@@ -86,27 +90,27 @@ export default defineComponent({
   top: 64px;
   left: 240px;
   width: calc(100vw - 240px);
-  transition: all .4s;
+  transition: all 0.4s;
   &.ciel-nav--collapse {
-      left: 65px;
-      width: calc(100vw - 65px);
+    left: 65px;
+    width: calc(100vw - 65px);
   }
   :deep .el-tabs {
     &__header {
       margin-bottom: 0px;
       .el-tabs__item {
-          border: none;
-          &:first-child {
-              &:hover {
-                  padding-left: 20px;
-              }
-              .el-icon-close{
-                  display: none;
-              }
+        border: none;
+        &:first-child {
+          &:hover {
+            padding-left: 20px;
           }
+          .el-icon-close {
+            display: none;
+          }
+        }
       }
       .el-tabs__nav {
-          border: none;
+        border: none;
       }
     }
   }

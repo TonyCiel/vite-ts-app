@@ -60,9 +60,11 @@ export default defineComponent({
       return route.path;
     });
     const onRouteChange = (e:any) => {
-      router.push({
-        path: e
-      })
+      if(activeRoute.value !== e) {
+        router.push({
+          path: e
+        })
+      }
     }
     return {
       ...toRefs(state),
