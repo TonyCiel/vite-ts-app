@@ -47,28 +47,34 @@ const routes: Array<RouteRecordRaw> = [
 ]
 const route = createRouter({
     history: createWebHashHistory('/admin-plat/'),
-    routes: [...routes],
+    routes: [...routes,...formatRoute(store.getters.menuList)],
 });
 const updateRouters = () => {
     let menu = formatRoute(store.getters.menuList);
+    console.log('routes',route.getRoutes())
     for(let i = 0; i< menu.length; i++) {
-        route.addRoute(menu[i]);
+        let name = menu[i].name || '';
+        if(!route.hasRoute(name)) {
+          route.addRoute(menu[i]);
+        }
     }
+    console.log('routes',route.getRoutes())
 }
 // 加载动态路由
-store.dispatch('GetMenuList').then(res => {
+store.dispatch('GetMenuList').then(() => {
     updateRouters();
 })
 route.beforeEach((to:any, form: any,next) => {
     const isLogin = getStore("token","session") ? true : false;
     // 保存路由tag
+    let menus = getStore("menu") || []; // 菜单被请掉了也重新登录
     if(to.path !== '/login' && to.path !== '/' && to.path !== '/404') {
         let tagValue = Object.assign({},to);
         delete tagValue.matched
         store.commit("ADD_TAG",tagValue);
     }
     // console.log('isLogin',isLogin)
-    if(!isLogin && to.path !== '/login' && to.path !== '/') {
+    if((!isLogin || !menus.length )&& to.path !== '/login' && to.path !== '/') {
         next({path: '/login'});
     }
     if(isLogin && to.path == "/") {
@@ -85,7 +91,7 @@ route.beforeEach((to:any, form: any,next) => {
     }, 200)
     let name:string = to.meta.title || to.name || "";
     document.title = name;
-    console.log(to,form);
+    // console.log(to,form);
     next()
 })
 

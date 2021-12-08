@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed } from "vue";
+import { defineComponent, reactive, toRefs, computed ,inject} from "vue";
 import { useStore } from "vuex";
 import { useRoute,useRouter } from "vue-router";
 import logo from "./logo.vue";
@@ -44,9 +44,7 @@ export default defineComponent({
     const menuList = computed(() => {
       return store.getters.menuList;
     });
-    const isCollapse = computed(() => {
-      return store.getters.collapse;
-    });
+    const isCollapse = inject('isCollapse')
     const state = reactive({
       menuProp: {
         label: "name",
@@ -59,6 +57,7 @@ export default defineComponent({
     const activeRoute = computed(() => {
       return route.path;
     });
+
     const onRouteChange = (e:any) => {
       if(activeRoute.value !== e) {
         router.push({

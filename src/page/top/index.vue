@@ -63,6 +63,7 @@ import {
   computed,
   onMounted,
   onUnmounted,
+  inject
 } from "vue";
 import { Search } from "@element-plus/icons";
 import { useStore } from "vuex";
@@ -143,9 +144,7 @@ export default defineComponent({
       let collapse:boolean = store.getters.collapse;
       store.commit("SET_COLLAPSE", !collapse);
     }
-    const isCollapse = computed(() => {
-      return store.getters.collapse
-    })
+    const isCollapse = inject('isCollapse')
     onMounted(() => screenfull.isEnabled && screenfull.on("change", change));
     onUnmounted(() => screenfull.isEnabled && screenfull.off("change", change));
     return {

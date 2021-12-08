@@ -5,8 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed } from "vue";
-import { useStore } from "vuex";
+import { defineComponent,inject } from "vue";
 export default defineComponent({
   props: {
     title: {
@@ -15,10 +14,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore();
-    const isCollapse = computed(() => {
-      return store.getters.collapse;
-    });
+    const isCollapse = inject('isCollapse')
     return {
       isCollapse
     }

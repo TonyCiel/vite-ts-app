@@ -12,12 +12,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed } from "vue";
+import { defineComponent,computed,provide } from "vue";
 import cielMenu from "./menu/index.vue";
 import cielTop from "./top/index.vue";
 import cielTags from "./tags/index.vue";
 import { useStore } from "vuex";
 export default defineComponent({
+  // provide: [isCollapse]
   components: {
     cielMenu,
     cielTop,
@@ -27,9 +28,12 @@ export default defineComponent({
     const store = useStore();
     const isCollapse = computed(() => {
       return store.getters.collapse;
-    })
+    });
+    store.dispatch('GetMenuList')
+    const privide  = provide('isCollapse',isCollapse);
     return {
-      isCollapse
+      isCollapse,
+      privide
     }
   }
 });

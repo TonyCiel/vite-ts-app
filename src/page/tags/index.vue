@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
+import { defineComponent, computed, ref, watch,inject } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { homePage } from "../../../env";
@@ -34,9 +34,7 @@ export default defineComponent({
     const tagList = computed(() => {
       return store.getters.tagList;
     });
-    const isCollapse = computed(() => {
-      return store.getters.collapse;
-    });
+    const isCollapse = inject('isCollapse')
     // 监听路由变化
     watch(
       () => route.fullPath,
@@ -100,6 +98,7 @@ export default defineComponent({
       margin-bottom: 0px;
       .el-tabs__item {
         border: none;
+        font-weight: normal;
         &:first-child {
           &:hover {
             padding-left: 20px;

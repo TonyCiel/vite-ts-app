@@ -16,6 +16,7 @@ export const formatRoute = (routes: Array<MenuItem>) => {
         if(!item.children) {
             router.push({
                 path: item.path,
+                name: item.name,
                 component: () => import(`../page/index.vue`),
                 children: [{
                     name: item.name,
@@ -26,6 +27,7 @@ export const formatRoute = (routes: Array<MenuItem>) => {
         } else {
             let route:RouteRecordRaw = {
                 path: item.path,
+                name: item.name,
                 component: () => import(`../page/index.vue`),
                 children: []
             }
