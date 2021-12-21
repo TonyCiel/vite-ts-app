@@ -41,7 +41,7 @@
       <img class="top-bar__img" src="../../assets/logo.svg" />
       <el-dropdown>
         <span class="el-dropdown-link">
-          admin
+          {{userInfo.userName}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <template #dropdown>
@@ -82,6 +82,10 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
+    // 用户信息
+    const userInfo = computed(() => {
+      return store.getters.userInfo;
+    });
     // 获取所有菜单
     const menus = computed(() => {
       return store.getters.allMenu;
@@ -157,7 +161,8 @@ export default defineComponent({
       nowPageRouteName,
       setCollapse,
       isCollapse,
-      homePage
+      homePage,
+      userInfo
     };
   },
 });

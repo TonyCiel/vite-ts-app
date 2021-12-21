@@ -15,8 +15,8 @@
         <menu-item
           v-for="item in menuList"
           :parent="item"
-          :key="item.fullPath"
-          :index="item.fullPath"
+          :key="`${item.path}/index`"
+          :index="`${item.path}/index`"
           :menu="item"
           first
           :props="menuProp"

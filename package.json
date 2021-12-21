@@ -8,8 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "crypto-js": "^4.1.1",
     "element-plus": "1.1.0-beta.9",
+    "express": "^4.17.1",
     "mockjs": "^1.1.0",
+    "mysql": "^2.18.1",
     "vue": "^3.2.16",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"

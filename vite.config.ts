@@ -22,6 +22,8 @@ const config = {
       'vue',
       'vue-router',
       'element-plus',
+      'vuex',
+      'axios'
     ]
   },
   server: {
@@ -32,7 +34,7 @@ const config = {
     ssr: false,//是否服务端渲染
     proxy: {//代理配置
       '/api': {
-        target: 'http://localhost:8800/',
+        target: 'http://localhost:32334/',
         changeOrigin: true,
         ws: true,
         pathRewrite: {

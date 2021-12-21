@@ -5,6 +5,10 @@ npm init vite@latest
 # or
 yarn create vite
 ```
+### 安装node环境，把node后端跑起来
+```sh
+cd /src/server 
+node index.js
 
 ### 安装依赖
 

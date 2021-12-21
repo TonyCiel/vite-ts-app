@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { ElLoading } from 'element-plus';
 import page from '../page/index.vue';
 import store from '../store/index';
-import { formatRoute } from './views'
+import { getRoutes } from './views'
 import { getStore } from '../utils/store';
 
 // 静态路由
@@ -47,34 +47,18 @@ const routes: Array<RouteRecordRaw> = [
 ]
 const route = createRouter({
     history: createWebHashHistory('/admin-plat/'),
-    routes: [...routes,...formatRoute(store.getters.menuList)],
+    routes: [...routes,...getRoutes(store.getters.menuList)],
 });
-const updateRouters = () => {
-    let menu = formatRoute(store.getters.menuList);
-    console.log('routes',route.getRoutes())
-    for(let i = 0; i< menu.length; i++) {
-        let name = menu[i].name || '';
-        if(!route.hasRoute(name)) {
-          route.addRoute(menu[i]);
-        }
-    }
-    console.log('routes',route.getRoutes())
-}
-// 加载动态路由
-store.dispatch('GetMenuList').then(() => {
-    updateRouters();
-})
 route.beforeEach((to:any, form: any,next) => {
     const isLogin = getStore("token","session") ? true : false;
-    // 保存路由tag
-    let menus = getStore("menu") || []; // 菜单被请掉了也重新登录
+    // // 保存路由tag
     if(to.path !== '/login' && to.path !== '/' && to.path !== '/404') {
         let tagValue = Object.assign({},to);
         delete tagValue.matched
         store.commit("ADD_TAG",tagValue);
     }
-    // console.log('isLogin',isLogin)
-    if((!isLogin || !menus.length )&& to.path !== '/login' && to.path !== '/') {
+    // // console.log('isLogin',isLogin)
+    if(!isLogin && to.path !== '/login' && to.path !== '/') {
         next({path: '/login'});
     }
     if(isLogin && to.path == "/") {
