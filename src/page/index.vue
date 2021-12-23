@@ -5,7 +5,7 @@
     <cielTop></cielTop>
     <cielTags></cielTags>
     <div class="ciel-page-content">
-      <router-view> </router-view>
+      <router-view />
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ import cielTop from "./top/index.vue";
 import cielTags from "./tags/index.vue";
 import { useStore } from "vuex";
 import { getRoutes } from '../router/views'
-import route from '../router/index'
+import routeObj from '../router/index'
 export default defineComponent({
   // provide: [isCollapse]
   components: {
@@ -33,15 +33,12 @@ export default defineComponent({
     // 更新动态路由
     const updateRouters = () => {
       let menu = getRoutes(store.getters.menuList);
-      // console.log('routes',menu)
-      // console.log('更新；',menu)
       for (let i = 0; i < menu.length; i++) {
         let name = menu[i].name || "";
-        if (!route.hasRoute(name)) {
-          route.addRoute(menu[i]);
+        if (!routeObj.hasRoute(name)) {
+          routeObj.addRoute(menu[i]);
         }
       }
-      // console.log('routes',route.getRoutes())
     };
     onMounted(() => {
       store.dispatch("GetMenuList").then(() => {

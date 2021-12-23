@@ -50,7 +50,8 @@ const route = createRouter({
     routes: [...routes,...getRoutes(store.getters.menuList)],
 });
 route.beforeEach((to:any, form: any,next) => {
-    const isLogin = getStore("token","session") ? true : false;
+    const isHasUser = getStore("userInfo") ? true : false;
+    const isLogin = getStore("token","session") ? isHasUser ? true:  false : false;
     // // 保存路由tag
     if(to.path !== '/login' && to.path !== '/' && to.path !== '/404') {
         let tagValue = Object.assign({},to);

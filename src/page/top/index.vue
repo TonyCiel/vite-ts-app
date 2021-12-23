@@ -111,6 +111,12 @@ export default defineComponent({
     const logout = () => {
       ElMessageBox.confirm("退出系统, 是否继续?").then(() => {
         clearStore("token","session")
+        clearStore("menu")
+        clearStore("tagList")
+        clearStore("userInfo")
+        store.commit('SET_MENULIST', [])
+        store.commit('SET_MENUALL', []);
+        store.commit('SET_TAGS_NULL', [])
         router.push({ path: "/login" });
       });
     };

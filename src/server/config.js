@@ -31,7 +31,7 @@ const connection = mysql.createConnection({
 	port: 3306,
 	database: 'test',
 	user: 'root',
-	password: '925850'
+	password: ''
 });
 
 const getCode = (code, message,data) => {

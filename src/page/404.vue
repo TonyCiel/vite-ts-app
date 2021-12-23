@@ -1,7 +1,6 @@
 <template>
   <div class="error-page">
-    <div class="img"
-         style=" background-image: url('/@/assets/404.svg');"></div>
+    <div class="img"></div>
     <div class="content">
       <h1>404</h1>
       <div class="desc">抱歉，你访问的页面不存在</div>
@@ -41,6 +40,7 @@ export default defineComponent({
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
+    background-image: url('../assets/404.svg');
   }
   .content {
     h1 {

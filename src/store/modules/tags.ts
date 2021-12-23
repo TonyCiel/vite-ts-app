@@ -25,6 +25,10 @@ const tags = {
             });
             state.tagList = routes;
             setStore("tagList",state.tagList)
+        },
+        SET_TAGS_NULL(state,list) {
+            state.tagList = list;
+            setStore("tagList",state.tagList)
         }
     }
 }

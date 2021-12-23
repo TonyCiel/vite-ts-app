@@ -42,6 +42,7 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
     const menuList = computed(() => {
+      console.log('菜单更新value',store.getters.menuList)
       return store.getters.menuList;
     });
     const isCollapse = inject('isCollapse')

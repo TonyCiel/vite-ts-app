@@ -8,11 +8,11 @@ export const encryptAES  = (content: string,key :string) => {
   }).toString()
 }
 // aes解密
-export const decryptAES = (content,key) => {
+export const decryptAES = (content: string,key :string) => {
   const keys = CryptoJS.enc.Utf8.parse(key);
   return CryptoJS.AES.decrypt(content, keys, {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7
-  }).toString(CryptoJS.enc.Utf8)
+  }).toString(CryptoJS.enc.Utf8).toString()
 }
 
