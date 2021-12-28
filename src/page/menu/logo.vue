@@ -10,7 +10,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: "vue3.0管理平台",
+      default: "Vue3.0管理平台",
     },
   },
   setup() {
@@ -25,12 +25,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "/@/styles/common.scss";
 .ciel-logo {
-  @include bgCss(6%, 30px);
+  @include bgCss(8%, 30px);
   width: 240px;
   height: 64px;
   line-height: 64px;
-  padding-left: 8%;
-  background-image: url(/@/assets/logo.svg);
+  padding-left: 14%;
+  background-image: url(/@/assets/logo_white.png);
   font-size: 20px;
   color: white;
   box-sizing: border-box;

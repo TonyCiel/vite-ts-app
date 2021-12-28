@@ -4,7 +4,7 @@
       <div
         class="login-title flexlayout flexlayout_middle flexlayout_horizontal"
       >
-        <img class="login-title-icon" src="/@/assets/logo.svg" />
+        <img class="login-title-icon" src="/@/assets/logo_blue.png" />
         <p>vue3.0管理平台</p>
       </div>
       <div class="login-desc">
@@ -137,6 +137,7 @@ export default defineComponent({
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       .login-title-icon {
         width: 46px;
+        margin-right: 10px;
       }
     }
     .login-desc {
