@@ -1,10 +1,18 @@
 <template>
-  <header class="ciel-header flexlayout flexlayout_middle" :class="{'ciel-header--collapse': isCollapse}">
+  <header
+    class="ciel-header flexlayout flexlayout_middle"
+    :class="{ 'ciel-header--collapse': isCollapse }"
+  >
     <div class="ciel-header__collapse flexlayout flexlayout_middle">
-      <i :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="setCollapse"></i>
+      <i
+        :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
+        @click="setCollapse"
+      ></i>
       <el-breadcrumb>
         <el-breadcrumb-item :to="{ path: homePage }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item v-for="(item) in nowPageRouteName" :key="item" >{{item}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="item in nowPageRouteName" :key="item">{{
+          item
+        }}</el-breadcrumb-item>
       </el-breadcrumb>
       <!-- <p>主页</p> -->
     </div>
@@ -20,7 +28,7 @@
         </template>
         <template #default="{ item }">
           <div class="value">{{ item.name }}</div>
-          <span class="link">{{ item.fullPath }}</span>
+          <span class="link">{{ item.path }}</span>
         </template>
       </el-autocomplete>
     </div>
@@ -41,7 +49,7 @@
       <img class="top-bar__img" src="../../assets/logo.svg" />
       <el-dropdown>
         <span class="el-dropdown-link">
-          {{userInfo.userName}}
+          {{ userInfo.userName }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <template #dropdown>
@@ -63,15 +71,16 @@ import {
   computed,
   onMounted,
   onUnmounted,
-  inject
+  inject,
 } from "vue";
 import { Search } from "@element-plus/icons";
 import { useStore } from "vuex";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElNotification } from "element-plus";
 import screenfull from "screenfull";
-import {clearStore} from "../../utils/store";
-import {homePage} from '../../../env.js'
+import { clearStore } from "../../utils/store";
+import { homePage } from "../../../env.js";
+import { deepClone } from "../../utils/index";
 export default defineComponent({
   components: { Search },
   setup() {
@@ -90,11 +99,19 @@ export default defineComponent({
     const menus = computed(() => {
       return store.getters.allMenu;
     });
+    // 搜索栏菜单选择
+    const searchMenuList = computed(() => {
+      let list = deepClone(store.getters.allMenu);
+      list = list.filter((item) => {
+        return item.parentId != String(-1);
+      });
+      return list;
+    });
     // 顶部导航搜索
     const querySearch = (keyword: string, cb) => {
       const results = keyword
-        ? menus.value.filter(filterRoutePath(keyword))
-        : menus.value;
+        ? searchMenuList.value.filter(filterRoutePath(keyword))
+        : searchMenuList.value;
       cb(results);
     };
     // 过滤菜单
@@ -105,18 +122,18 @@ export default defineComponent({
     };
     // 跳转路由
     const onSelectPath = (item) => {
-      router.push({ path: item.fullPath });
+      router.push({ path: item.path });
     };
     // 退出登录
     const logout = () => {
       ElMessageBox.confirm("退出系统, 是否继续?").then(() => {
-        clearStore("token","session")
-        clearStore("menu")
-        clearStore("tagList")
-        clearStore("userInfo")
-        store.commit('SET_MENULIST', [])
-        store.commit('SET_MENUALL', []);
-        store.commit('SET_TAGS_NULL', [])
+        clearStore("token", "session");
+        clearStore("menu");
+        clearStore("tagList");
+        clearStore("userInfo");
+        store.commit("SET_MENULIST", []);
+        store.commit("SET_MENUALL", []);
+        store.commit("SET_TAGS_NULL", []);
         router.push({ path: "/login" });
       });
     };
@@ -139,22 +156,18 @@ export default defineComponent({
     };
     // 面包屑内容
     const nowPageRouteName = computed(() => {
-      let parent = menus.value.filter(item => {
-        return item.fullPath === route.path
+      let parent = menus.value.filter((item) => {
+        return item.path === route.path || `${item.path}/index` === route.path;
       });
-      let name:Array<string> = [];
-      if(parent.length)  {
-        name.push(parent[0].parentName || parent[0].name);
-        parent[0].parentName ? name.push(parent[0].name) : '';
-      }
-      return name
+      console.log("面包屑", parent);
+      return parent.length ? parent[0].parentNames : [];
     });
     // 设置菜单的collapse
     const setCollapse = () => {
-      let collapse:boolean = store.getters.collapse;
+      let collapse: boolean = store.getters.collapse;
       store.commit("SET_COLLAPSE", !collapse);
-    }
-    const isCollapse = inject('isCollapse')
+    };
+    const isCollapse = inject("isCollapse");
     onMounted(() => screenfull.isEnabled && screenfull.on("change", change));
     onUnmounted(() => screenfull.isEnabled && screenfull.off("change", change));
     return {
@@ -168,7 +181,7 @@ export default defineComponent({
       setCollapse,
       isCollapse,
       homePage,
-      userInfo
+      userInfo,
     };
   },
 });
@@ -184,8 +197,10 @@ export default defineComponent({
   width: calc(100vw - 240px);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
   background-color: white;
-  transition: all .4s;
+  transition: all 0.4s;
   z-index: 99;
+  background-color: #409eff;
+  color: white;
   &.ciel-header--collapse {
     left: 65px;
     width: calc(100vw - 65px);
@@ -195,6 +210,13 @@ export default defineComponent({
     :deep .el-input__inner {
       border: none;
       width: 400px !important;
+      background: transparent;
+      &::placeholder {
+        color: white!important;
+      }
+      :deep .el-input__prefix {
+        color: white;
+      }
     }
   }
   .ciel-header__collapse {
@@ -202,7 +224,10 @@ export default defineComponent({
     line-height: 64px;
     flex: 1;
     .el-breadcrumb {
-      margin-left: 20px ;
+      margin-left: 20px;
+      :deep .el-breadcrumb__inner {
+        color: white !important;
+      }
     }
     i {
       font-size: 30px;
@@ -215,6 +240,11 @@ export default defineComponent({
   }
   .ciel-header__user {
     padding-right: 50px;
+    .el-dropdown {
+      .el-dropdown-link {
+        color: white;
+      }
+    }
     .top-bar__img {
       margin: 0 8px 0 5px;
       padding: 2px;
@@ -224,6 +254,7 @@ export default defineComponent({
       box-sizing: border-box;
       border: 1px solid #eee;
       vertical-align: middle;
+      background-color: white;
     }
   }
   .ciel-header__quanping {

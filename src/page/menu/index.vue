@@ -1,11 +1,11 @@
 <template>
-  <div class="ciel-menu">
-    <el-scrollbar style="height: 100%;">
+  <div  class="ciel-menu" >
+    <el-scrollbar  style="height: 100%;">
       <logo></logo>
       <el-menu
-        background-color="#409eff"
-        text-color="#e5e5e5"
-        active-text-color="white"
+        background-color="#FFFFFF"
+        text-color="#333"
+        active-text-color="#409eff"
         @select="onRouteChange"
         :default-active="activeRoute"
         mode="vertical"
@@ -83,23 +83,27 @@ export default defineComponent({
   user-select: none;
   position: fixed;
   height: 100vh;
-  background-color: #409eff;
+  // background-color: #409eff;
   left: 0;
   top: 0;
   transition: width 0.2s;
   box-sizing: border-box;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  box-shadow: 2px 0px 6px 0px rgba(0, 21, 41, 0.06);
+  .ciel-menu--collapse {
+    width: 56px;
+  }
   .el-menu {
     border-right: 0;
     :deep .el-menu-item,
     :deep .el-sub-menu {
       i {
-        color: #e5e5e5;
+        color: #333;
       }
       .el-menu-item {
         &.is-active {
-          background-color: white !important;
+          background-color: rgba(246, 255, 254) !important;
           color: #409eff !important;
+          border-right: 3px solid #409eff;
           i {
             color: #409eff;
           }
@@ -108,8 +112,9 @@ export default defineComponent({
     }
     :deep .el-menu-item {
       &.is-active {
-          background-color: white !important;
+          background-color: rgba(246, 255, 254) !important;
           color: #409eff !important;
+          border-right: 3px solid #409eff;
           i {
             color: #409eff;
           }

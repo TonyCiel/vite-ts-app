@@ -10,7 +10,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      default: "CielAdmin管理平台",
+      default: "vue3.0管理平台",
     },
   },
   setup() {
@@ -38,8 +38,9 @@ export default defineComponent({
   cursor: pointer;
   user-select: none; 
   transition: all .4s;
+  background-color: #409eff;
   &.ciel-logo--collapse {
-    width: 56px;
+    width: 65px;
     background-position: center;
   }
   .ciel-logo--title {

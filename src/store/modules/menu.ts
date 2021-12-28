@@ -1,7 +1,7 @@
 import { MenuItem, menuState } from '../../type/index';
 import { reqMenuRoute } from '../../api/system/index';
 import { getStore, setStore } from '../../utils/store';
-import {listToTree} from '../../utils/index';
+import {listToTree,getParentNameList} from '../../utils/index';
 
 const memu = {
     state: (): menuState => ({
@@ -17,19 +17,20 @@ const memu = {
                     let user:any = getStore('userInfo');
                     if (user) {
                         let roleMenus=  user.roleMenus || '';
-                        let list = routes.filter(r => {
+                        let list = routes.filter(r => { // 过滤掉有权限的
                             return roleMenus.indexOf(r.id ) > -1
                         });
                         routes = listToTree(list, -1);
-                        console.log('新的',listToTree(list, -1))
+                        list.forEach(item => {
+                            item.parentNames = getParentNameList(routes,item.id)
+                        })
+                        commit('SET_MENUALL', list)
+                        console.log('新的',routes)
+                        setStore("menu", routes)
+                        commit('SET_MENULIST', routes)
+                        resolve(res)
                     }
-                    // console.log('啊哈',res)
-                    console.log('getStore', getStore('userInfo'))
-                    // routes.shift()
-                    setStore("menu", routes)
-                    commit('SET_MENULIST', routes)
-                    commit('SET_MENUALL', routes)
-                    resolve(res)
+                    
                 })
             })
         }
@@ -40,17 +41,11 @@ const memu = {
         },
         // 把所有菜单提出来
         SET_MENUALL(state, list: Array<MenuItem>) {
-            let menu = state.allMenu;
-            list.forEach(ele => {
-                if (ele.children && ele.children.length) {
-                    ele.children.forEach(child => {
-                        menu.push(child);
-                    })
-                } else {
-                    menu.push(ele);
-                }
-            })
-            state.allMenu = menu
+            console.log('allllist',list)
+            state.allMenu = list
+            // .filter(item => {
+            //     return item.parentId != String(-1)
+            // });
         },
         SET_COLLAPSE(state, value: boolean) {
             state.collapse = value

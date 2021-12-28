@@ -5,7 +5,7 @@
         class="login-title flexlayout flexlayout_middle flexlayout_horizontal"
       >
         <img class="login-title-icon" src="/@/assets/logo.svg" />
-        <p>Ciel开发平台</p>
+        <p>vue3.0管理平台</p>
       </div>
       <div class="login-desc">
         前端UI项目，基于vue3.0 、elementPlus、typescript、node等流行技术栈。
