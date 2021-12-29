@@ -28,9 +28,9 @@ yarn build
 ```
 **目前仅支持现代浏览器**
 
-| IE / Edge | Firefox | Chrome | Safari |
-| --------- | --------- | --------- | --------- |
-| Edge | last 2 versions | last 2 versions | last 2 versions |
+| IE / Edge | Firefox | Chrome  |
+| --------- | --------- | --------- |
+| Edge | last 2 versions | last 2 versions | 
 
 ### 效果展示
 **通过登录超级管理员进入**
