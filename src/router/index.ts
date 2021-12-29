@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import { ElLoading } from 'element-plus';
 import page from '../page/index.vue';
 import store from '../store/index';
 import { getRoutes } from './views'
 import { getStore } from '../utils/store';
+import { configure, start, done } from 'nprogress'
+configure({ showSpinner: false })
 
 // 静态路由
 const routes: Array<RouteRecordRaw> = [
@@ -45,11 +46,12 @@ const routes: Array<RouteRecordRaw> = [
     }
 
 ]
-const route = createRouter({
+const router = createRouter({
     history: createWebHashHistory('/admin-plat/'),
     routes: [...routes,...getRoutes(store.getters.menuList)],
 });
-route.beforeEach((to:any, form: any,next) => {
+router.beforeEach((to:any, form: any,next) => {
+    start()
     const isHasUser = getStore("userInfo") ? true : false;
     const isLogin = getStore("token","session") ? isHasUser ? true:  false : false;
     // // 保存路由tag
@@ -65,19 +67,15 @@ route.beforeEach((to:any, form: any,next) => {
     if(isLogin && to.path == "/") {
         next({path: '/wel/index'});
     }
-    // console.log(next)
-    let loading = ElLoading.service({
-        lock: true,
-        text: 'Loading',
-        background: 'rgba(0, 0, 0, 0.7)',
-    });
-    setTimeout(() => {
-        loading.close()
-    }, 200)
     let name:string = to.meta.title || to.name || "";
     document.title = name;
     // console.log(to,form);
     next()
 })
+router.afterEach(() => {
+    setTimeout(() => {
+        done()
+    }, 200)
+})
 
-export default route
+export default router

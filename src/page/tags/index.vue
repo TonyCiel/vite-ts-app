@@ -89,6 +89,7 @@ export default defineComponent({
   left: 240px;
   width: calc(100vw - 240px);
   transition: all 0.4s;
+  z-index: 99;
   &.ciel-nav--collapse {
     left: 65px;
     width: calc(100vw - 65px);

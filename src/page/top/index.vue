@@ -46,7 +46,7 @@
       </el-tooltip>
     </div>
     <div class="ciel-header__user">
-      <img class="top-bar__img" src="../../assets/logo.svg" />
+      <img class="top-bar__img" src="../../assets/user.png" />
       <el-dropdown>
         <span class="el-dropdown-link">
           {{ userInfo.userName }}

@@ -63,8 +63,8 @@ export default defineComponent({
     const loginForm: Ref = ref(); // 使用ref拿dom元素的时候一定要记得 在setup中return出去
     const state = reactive({
       loginFrom: {
-        name: "",
-        password: "",
+        name: "test",
+        password: "test@2021&123",
       },
       loginRules: {
         name: [{ required: true, message: "请输入用户名", trigger: "blur" }],

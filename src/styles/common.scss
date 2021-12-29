@@ -7,6 +7,9 @@
 @import './icon.scss';
 //滚动条样式
 @include scrollBar;
+body {
+	font-family: PingFangSC-Medium, PingFang SC;
+}
 div {
 	font-size: 14px;
 }

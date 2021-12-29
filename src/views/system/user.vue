@@ -1,7 +1,7 @@
 <template>
   <el-row type="flex">
     <!-- 角色管理列表 -->
-    <el-col :span="6">
+    <el-col :span="6" style="height: calc(100vh - 130px) ">
       <basic-container class="role-wrap">
         <ul>
           <li
@@ -314,10 +314,7 @@ export default defineComponent({
     // 编辑角色
     const editRole = (item) => {
       state.roleInfo = Object.assign({}, item);
-      console.log(state.roleInfo);
       let menuIds = item.roleMenus.split(',')
-      console.log('menuIds',menuIds)
-     
       state.isShowRoleModel = true;
       setTimeout(() => {menuTree.value.setCheckedKeys(menuIds)})
     };
@@ -359,8 +356,6 @@ export default defineComponent({
       state.userInfo = row;
       state.userInfo.account = row.userAccount;
       state.userInfo.roleids = row.roleIds;
-      // state.userInfo.password = decryptAES(row.userPassword,"998877001");
-      console.log('state.userInfo',state.userInfo);
       state.isShowUserModel = true;
     }
     return {

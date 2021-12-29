@@ -24,4 +24,7 @@
 body {
   margin: 0;
 }
+#nprogress .bar {
+  background: #00185a !important;
+}
 </style>
