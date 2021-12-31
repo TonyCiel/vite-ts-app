@@ -1,15 +1,21 @@
 <template>
   <el-row type="flex">
     <el-col :span="12">
+      <!-- <basic-count-up idName="12" :end="132000"></basic-count-up > -->
+      <!-- <basic-count-up style="margin-left: 300px" idName="13" :end="232000"></basic-count-up > -->
+      <!-- <basic-count-up :end="432000"></basic-count-up > -->
       <basic-container class="statics-user" title="用户统计">
         <section class="static-wrap flexlayout flexlayout_middle">
           <div
             class="static-wrap-item flexitem_auto"
-            v-for="item in userList"
+            v-for="(item,index) in userList"
             :key="item.label"
           >
             <p class="static-wrap-item__title">{{ item.label }}</p>
-            <p class="static-wrap-item__subtitle">{{ item.value }}</p>
+            <p class="static-wrap-item__subtitle">
+              <!-- {{ item.value }} -->
+              <basic-count-up  :idName="`user${index}`" :end="item.value"></basic-count-up >
+            </p>
           </div>
         </section>
         <!-- <basic-count-up :end="10"></basic-count-up> -->
@@ -20,11 +26,13 @@
         <section class="static-wrap flexlayout flexlayout_middle">
           <div
             class="static-wrap-item flexitem_auto"
-            v-for="item in userList"
+            v-for="(item,index) in userList"
             :key="item.label"
           >
             <p class="static-wrap-item__title">{{ item.label }}</p>
-            <p class="static-wrap-item__subtitle">{{ item.value }}</p>
+            <p class="static-wrap-item__subtitle">
+              <basic-count-up  :idName="`group${index}`" :end="item.value"></basic-count-up >
+            </p>
           </div>
         </section>
       </basic-container>
@@ -35,22 +43,22 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import BasicContainer from "../../../components/basic-container/index.vue";
-// import BasicCountUp from "../../../components/basic-count-up/index.vue";
+import BasicCountUp from "../../../components/basic-count-up/index.vue";
 export default defineComponent({
   components: {
     BasicContainer,
-    // BasicCountUp
+    BasicCountUp
   },
   setup() {
     const state = reactive({
       userList: [
         {
           label: "今日新增",
-          value: 223,
+          value: 468,
         },
         {
           label: "用户总数",
-          value: 289,
+          value: 876,
         },
         {
           label: "今日流失",
@@ -82,18 +90,8 @@ export default defineComponent({
     margin-top: 10px;
     width: 80%;
   .static-wrap-item {
-      position: relative;
       & p {
           margin: 0;
-      }
-      & ::before {
-        position: absolute;
-        content: '';
-        width: 1px;
-        height: 28px;
-        background-color: #E9E9E9;
-        right: 40px;
-        top: 14px;
       }
     .static-wrap-item__title {
       font-size: 14px;
@@ -103,6 +101,16 @@ export default defineComponent({
       font-size: 26px;
       font-weight: 500;
       color: rgba(0, 0, 0, 0.85);
+      position: relative;
+      &::before {
+        position: absolute;
+        content: '';
+        width: 1px;
+        height: 28px;
+        background: #E9E9E9;
+        right: 50px;
+        top: 0px;
+      }
     }
   }
 }
