@@ -4,7 +4,6 @@ dist
 dist-ssr
 *.local
 build.sh
-build_node.sh
-build_pic.sh
+build_*.sh
 yarn-error.log
 yarn.lock

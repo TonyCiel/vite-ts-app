@@ -15,7 +15,7 @@ import { defineComponent, computed, provide, onMounted } from "vue";
 import cielMenu from "./menu/index.vue";
 import cielTop from "./top/index.vue";
 import cielTags from "./tags/index.vue";
-import { useStore } from "vuex";
+import useBasicHook from '../hooks/basic';
 import { getRoutes } from '../router/views'
 import routeObj from '../router/index'
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
     cielTags,
   },
   setup() {
-    const store = useStore();
+    const { store } = useBasicHook();
     const isCollapse = computed(() => {
       return store.getters.collapse;
     });

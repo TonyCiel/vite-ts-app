@@ -46,20 +46,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed, Ref, ref } from "vue";
+import { defineComponent, reactive, toRefs, computed, Ref, ref, onMounted } from "vue";
 import { valideForm } from "../utils/formUtils";
 import { ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
 import { setStore } from "../utils/store";
 import { homePage } from "../../env.js";
 import { encryptAES } from "../utils/CryptyE";
 import { login } from "../api/user/index";
-import { useStore } from "vuex";
+import useBasicHook from '../hooks/basic';
 export default defineComponent({
-  components: {},
   setup() {
-    const router = useRouter();
-    const store = useStore();
+    const {router,store} = useBasicHook();
     const loginForm: Ref = ref(); // 使用ref拿dom元素的时候一定要记得 在setup中return出去
     const state = reactive({
       loginFrom: {

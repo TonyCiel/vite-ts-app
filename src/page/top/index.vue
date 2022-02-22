@@ -74,13 +74,12 @@ import {
   inject,
 } from "vue";
 import { Search } from "@element-plus/icons";
-import { useStore } from "vuex";
-import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElNotification } from "element-plus";
 import screenfull from "screenfull";
 import { clearStore } from "../../utils/store";
 import { homePage } from "../../../env.js";
 import { deepClone } from "../../utils/index";
+import useBasicHook from '../../hooks/basic';
 export default defineComponent({
   components: { Search },
   setup() {
@@ -88,9 +87,7 @@ export default defineComponent({
       searchKeyword: "",
       isFullscreen: false, // 是否全屏
     });
-    const store = useStore();
-    const router = useRouter();
-    const route = useRoute();
+    const {store,route,router} = useBasicHook();
     // 用户信息
     const userInfo = computed(() => {
       return store.getters.userInfo;

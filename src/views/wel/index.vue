@@ -36,7 +36,7 @@ import { defineComponent, computed } from "vue";
 import BasicContainer from "../../components/basic-container/index.vue";
 import Statistics from "./components/Statistics.vue";
 import LineChart from "./components/LineChart.vue";
-import { useStore } from "vuex";
+import useBasicHook from '../../hooks/basic';
 export default defineComponent({
   components: {
     BasicContainer,
@@ -44,7 +44,7 @@ export default defineComponent({
     LineChart,
   },
   setup() {
-    const store = useStore();
+    const {store} = useBasicHook();
     // 用户信息
     const userInfo = computed(() => {
       return store.getters.userInfo;

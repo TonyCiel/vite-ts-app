@@ -41,8 +41,8 @@ export function getParentNameList(list: Array<any>, id:string) {
     return findParent(list, id);
 }
 export const getObjType = (obj:any) : any => {
-    var toString = Object.prototype.toString;
-    var map = {
+    let toString = Object.prototype.toString;
+    let map = {
       '[object Boolean]': 'boolean',
       '[object Number]': 'number',
       '[object String]': 'string',
@@ -63,8 +63,8 @@ export const getObjType = (obj:any) : any => {
  * 对象深拷贝
  */
  export const deepClone = (data:any) => {
-    var type = getObjType(data);
-    var obj;
+    let type = getObjType(data);
+    let obj:any;
     if (type === 'array') {
       obj = [];
     } else if (type === 'object') {

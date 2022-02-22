@@ -21,14 +21,11 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch,inject } from "vue";
-import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
+import useBasicHook from '../../hooks/basic';
 import { homePage } from "../../../env";
 export default defineComponent({
   setup() {
-    const store = useStore();
-    const route = useRoute();
-    const router = useRouter();
+    const {store,route,router} = useBasicHook();
     const tabValue = ref(); // 选中的tab
     tabValue.value = route.fullPath;
     const tagList = computed(() => {

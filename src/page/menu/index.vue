@@ -28,19 +28,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed ,inject} from "vue";
-import { useStore } from "vuex";
-import { useRoute,useRouter } from "vue-router";
 import logo from "./logo.vue";
 import MenuItem from "./menuItem.vue";
+import useBasicHook from '../../hooks/basic';
 export default defineComponent({
   components: {
     logo,
     MenuItem,
   },
   setup() {
-    const store = useStore();
-    const route = useRoute();
-    const router = useRouter();
+    const {store,route,router} = useBasicHook();
     const menuList = computed(() => {
       console.log('菜单更新value',store.getters.menuList)
       return store.getters.menuList;
