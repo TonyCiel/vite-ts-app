@@ -13,7 +13,9 @@ const config = {
     alias: {
       '/@': pathResolve('./src'),
     },
+    // extensions: ['.js', '.vue', '.json', ".scss"],
   },
+
   plugins: [vue(),vueJsx()],
   outDir: 'dist',//构建输出将放在其中。会在构建之前删除旧目录。@default 'dist'
   minify: 'esbuild',//构建时的压缩方式
@@ -23,8 +25,13 @@ const config = {
       'vue-router',
       'element-plus',
       'vuex',
-      'axios'
+      'axios',
+      'echarts'
     ]
+  },
+  build: {
+    sourcemap: false,
+    chunkSizeWarningLimit: 1500,
   },
   server: {
     hostname: 'localhost',//本地启动的服务地址
@@ -34,7 +41,7 @@ const config = {
     ssr: false,//是否服务端渲染
     proxy: {//代理配置
       '/api': {
-        target: 'http://localhost:32334/',
+        target: 'http://47.101.59.21:8080/',
         changeOrigin: true,
         ws: true,
         pathRewrite: {

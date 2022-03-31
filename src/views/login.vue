@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed, Ref, ref, onMounted } from "vue";
+import { defineComponent, reactive, toRefs, computed, Ref, ref, unref, onMounted } from "vue";
 import { valideForm } from "../utils/formUtils";
 import { ElMessage } from "element-plus";
 import { setStore } from "../utils/store";
@@ -99,6 +99,10 @@ export default defineComponent({
         path: homePage,
       });
     };
+    // onMounted(() => {
+    //   console.log('fromRed',loginForm.value)
+    //   console.log('from',unref(loginForm))
+    // })
     return {
       ...toRefs(state),
       loginBtnDisabled,

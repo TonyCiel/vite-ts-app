@@ -163,6 +163,8 @@ export default defineComponent({
     const setCollapse = () => {
       let collapse: boolean = store.getters.collapse;
       store.commit("SET_COLLAPSE", !collapse);
+      var event = new Event('resize')
+      window.dispatchEvent(event)
     };
     const isCollapse = inject("isCollapse");
     onMounted(() => screenfull.isEnabled && screenfull.on("change", change));

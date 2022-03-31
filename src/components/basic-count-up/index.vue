@@ -85,7 +85,6 @@ export default defineComponent({
       }, duration * 50);
     };
     
-    console.log("end", props);
     return {
     };
   },

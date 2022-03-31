@@ -27,34 +27,42 @@
     </basic-container>
     <!-- 统计 -->
     <statistics></statistics>
+    <div class="flexlayout">
+      <pie-chart></pie-chart>
+      <radar-chart></radar-chart>
+    </div>
     <line-chart></line-chart>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import BasicContainer from "../../components/basic-container/index.vue";
 import Statistics from "./components/Statistics.vue";
 import LineChart from "./components/LineChart.vue";
-import useBasicHook from '../../hooks/basic';
+import PieChart from "./components/PieChart.vue";
+import RadarChart from "./components/RadarChart.vue";
+import useBasicHook from "../../hooks/basic";
 export default defineComponent({
   components: {
     BasicContainer,
     Statistics,
     LineChart,
+    PieChart,
+    RadarChart
   },
   setup() {
-    const {store} = useBasicHook();
+    const { store } = useBasicHook();
     // 用户信息
     const userInfo = computed(() => {
       return store.getters.userInfo;
     });
     const goGithub = () => {
-        window.open('https://github.com/TonyCiel/vite-ts-app');
-    }
+      window.open("https://github.com/TonyCiel/vite-ts-app");
+    };
     return {
       userInfo,
-      goGithub
+      goGithub,
     };
   },
 });
