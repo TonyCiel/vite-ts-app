@@ -41,7 +41,7 @@ const config = {
     ssr: false,//是否服务端渲染
     proxy: {//代理配置
       '/api': {
-        target: 'http://47.101.59.21:8080/',
+        target: 'http://localhost/',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
