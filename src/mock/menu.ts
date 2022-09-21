@@ -30,7 +30,7 @@ const menus1 = [
         parentId: -1,
     },
     {
-        name: '测试菜单',
+        name: '多级菜单',
         path: '/menu',
         id: '02',
         icon: 'el-icon-c-scale-to-original',
@@ -63,7 +63,21 @@ const menus1 = [
         id: '022',
         icon: 'el-icon-tickets',
         parentId: "02",
-    }
+    },
+    {
+        name: '组件展示',
+        path: '/component',
+        id: '03',
+        icon: 'el-icon-menu',
+        parentId: -1,
+    },
+    {
+        name: '地图组件',
+        path: '/component/amap',
+        id: '031',
+        icon: 'el-icon-location-information',
+        parentId: '03',
+    },
 ]
 // const menus = [
 //     {

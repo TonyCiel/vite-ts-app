@@ -42,6 +42,6 @@
     "preview/**/*.d.ts",
     "preview/**/*.tsx",
     "preview/**/*.vue"
-  ],
+, "src/permission.ts"  ],
   "exclude": ["node_modules", "dist"]
 }

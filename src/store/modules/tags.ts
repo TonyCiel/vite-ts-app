@@ -1,5 +1,5 @@
 import {setStore,getStore} from '../../utils/store';
-import {homePage} from '../../../env.js';
+import {homePage} from '../../../env';
 const tags = {
     state: {
         tagList: getStore('tagList') || []
@@ -22,6 +22,20 @@ const tags = {
             let list = state.tagList;
             let routes = list.filter(item => {
                 return item.fullPath != fullPath;
+            });
+            state.tagList = routes;
+            setStore("tagList",state.tagList)
+        },
+        // 删除所有标签
+        DEL_ALL_TAG: (state) => {
+            state.tagList = [];
+            setStore("tagList",state.tagList)
+        },
+        // 移除其他标签
+        DEL_OTHER_TAG: (state,fullPath:string) => {
+            let list = state.tagList;
+            let routes = list.filter(item => {
+                return item.fullPath == fullPath;
             });
             state.tagList = routes;
             setStore("tagList",state.tagList)

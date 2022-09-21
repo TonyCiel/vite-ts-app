@@ -1,9 +1,7 @@
 <template>
   <div class="login-page">
     <header class="login-header">
-      <div
-        class="login-title flexlayout flexlayout_middle flexlayout_horizontal"
-      >
+      <div class="login-title flexlayout flexlayout_middle flexlayout_horizontal">
         <img class="login-title-icon" src="/@/assets/logo_blue.png" />
         <p>vue3.0管理平台</p>
       </div>
@@ -12,33 +10,16 @@
       </div>
     </header>
     <section class="login-content">
-      <el-form
-        label-position="top"
-        label-width="100px"
-        :model="loginFrom"
-        :rules="loginRules"
-        ref="loginForm"
-      >
+      <el-form label-position="top" label-width="100px" :model="loginFrom" :rules="loginRules" ref="loginForm">
         <el-form-item label="用户名:" prop="name">
-          <el-input
-            v-model="loginFrom.name"
-            placeholder="请输入用户名"
-          ></el-input>
+          <el-input v-model="loginFrom.name" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <el-form-item label="密码: " prop="password">
-          <el-input
-            show-password
-            type="password"
-            placeholder="请输入密码"
-            v-model="loginFrom.password"
-          ></el-input>
+          <el-input show-password type="password" placeholder="请输入密码" v-model="loginFrom.password"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button
-            @click.stop="submitLogin"
-            :type="loginBtnDisabled ? 'primary' : 'info'"
-            >登录</el-button
-          >
+          <el-button @click.stop="submitLogin" :loading="isLoading" :type="loginBtnDisabled ? 'primary' : 'info'">登录
+          </el-button>
         </el-form-item>
       </el-form>
     </section>
@@ -50,13 +31,14 @@ import { defineComponent, reactive, toRefs, computed, Ref, ref, unref, onMounted
 import { valideForm } from "../utils/formUtils";
 import { ElMessage } from "element-plus";
 import { setStore } from "../utils/store";
-import { homePage } from "../../env.js";
+import { homePage } from "../../env";
 import { encryptAES } from "../utils/CryptyE";
 import { login } from "../api/user/index";
 import useBasicHook from '../hooks/basic';
 export default defineComponent({
   setup() {
-    const {router,store} = useBasicHook();
+    // state
+    const { router, store } = useBasicHook();
     const loginForm: Ref = ref(); // 使用ref拿dom元素的时候一定要记得 在setup中return出去
     const state = reactive({
       loginFrom: {
@@ -68,6 +50,8 @@ export default defineComponent({
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
     });
+    const isLoading: Ref<Boolean> = ref(false);
+    // methods
     // 登录按钮是否置灰
     const loginBtnDisabled = computed(() => {
       let { name, password } = state.loginFrom;
@@ -87,10 +71,11 @@ export default defineComponent({
       if (!result) {
         return;
       }
-      let {name,password} = state.loginFrom;
+      let { name, password } = state.loginFrom;
+      isLoading.value = true;
       let res = await login({
-          account: name,
-          password: encryptAES(password,'998877001'),
+        account: name,
+        password: encryptAES(password, '998877001'),
       })
       store.commit("UPDATE_USERINFO", res.data);
       setStore("token", "ax1KywunnAmsp949Gyu", "session"); // 随便设置一个token，没用node生成了
@@ -109,6 +94,7 @@ export default defineComponent({
       loginForm,
       submitLogin,
       isAllowPass,
+      isLoading
     };
   },
 });
@@ -116,6 +102,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "/@/styles/common.scss";
+
 .login-page {
   @include bgCss(center, 100%);
   width: 100vw;
@@ -124,9 +111,11 @@ export default defineComponent({
   padding-top: 20vh;
   box-sizing: border-box;
   background-color: #f0f2f5;
+
   .login-header {
     margin: 0 auto;
     text-align: center;
+
     .login-title {
       position: relative;
       width: 100%;
@@ -136,11 +125,13 @@ export default defineComponent({
       font-weight: 600;
       font-size: 33px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+
       .login-title-icon {
         width: 46px;
         margin-right: 10px;
       }
     }
+
     .login-desc {
       margin-top: 12px;
       margin-bottom: 40px;
@@ -148,12 +139,15 @@ export default defineComponent({
       font-size: 14px;
     }
   }
+
   .login-content {
     width: 410px;
     margin: 0 auto;
+
     :deep .el-input__inner {
       background-color: white;
     }
+
     :deep .el-button {
       width: 100%;
     }

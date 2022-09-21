@@ -1,30 +1,22 @@
 <template>
-  <header
-    class="ciel-header flexlayout flexlayout_middle"
-    :class="{ 'ciel-header--collapse': isCollapse }"
-  >
+  <header class="ciel-header flexlayout flexlayout_middle" :class="{ 'ciel-header--collapse': isCollapse }">
     <div class="ciel-header__collapse flexlayout flexlayout_middle">
-      <i
-        :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
-        @click="setCollapse"
-      ></i>
+      <i :class="!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold'" @click="setCollapse"></i>
       <el-breadcrumb>
         <el-breadcrumb-item :to="{ path: homePage }">首页</el-breadcrumb-item>
         <el-breadcrumb-item v-for="item in nowPageRouteName" :key="item">{{
-          item
+        item
         }}</el-breadcrumb-item>
       </el-breadcrumb>
       <!-- <p>主页</p> -->
     </div>
     <div class="ciel-header__search">
-      <el-autocomplete
-        v-model="searchKeyword"
-        :fetch-suggestions="querySearch"
-        @select="onSelectPath"
-        placeholder="请输入您想搜索的内容"
-      >
+      <el-autocomplete v-model="searchKeyword" :fetch-suggestions="querySearch" @select="onSelectPath"
+        placeholder="请输入您想搜索的内容">
         <template #prefix>
-          <el-icon class="el-input__icon"><search /></el-icon>
+          <el-icon class="el-input__icon">
+            <search />
+          </el-icon>
         </template>
         <template #default="{ item }">
           <div class="value">{{ item.name }}</div>
@@ -33,15 +25,8 @@
       </el-autocomplete>
     </div>
     <div class="ciel-header__quanping">
-      <el-tooltip
-        class="item"
-        effect="dark"
-        :content="!isFullscreen ? '全屏' : '退出全屏'"
-        placement="bottom-start"
-      >
-        <i class="iconfont" @click="handleScreen" v-if="!isFullscreen"
-          >&#xe8fa;</i
-        >
+      <el-tooltip class="item" effect="dark" :content="!isFullscreen ? '全屏' : '退出全屏'" placement="bottom-start">
+        <i class="iconfont" @click="handleScreen" v-if="!isFullscreen">&#xe8fa;</i>
         <i class="iconfont" v-else @click="handleScreen">&#xe8fb;</i>
       </el-tooltip>
     </div>
@@ -77,7 +62,7 @@ import { Search } from "@element-plus/icons";
 import { ElMessageBox, ElNotification } from "element-plus";
 import screenfull from "screenfull";
 import { clearStore } from "../../utils/store";
-import { homePage } from "../../../env.js";
+import { homePage } from "../../../env";
 import { deepClone } from "../../utils/index";
 import useBasicHook from '../../hooks/basic';
 export default defineComponent({
@@ -87,7 +72,7 @@ export default defineComponent({
       searchKeyword: "",
       isFullscreen: false, // 是否全屏
     });
-    const {store,route,router} = useBasicHook();
+    const { store, route, router } = useBasicHook();
     // 用户信息
     const userInfo = computed(() => {
       return store.getters.userInfo;
@@ -200,50 +185,63 @@ export default defineComponent({
   z-index: 99;
   background-color: #409eff;
   color: white;
+
   &.ciel-header--collapse {
     left: 65px;
     width: calc(100vw - 65px);
   }
+
   .ciel-header__search {
     flex: 1;
+
     :deep .el-input__inner {
       border: none;
       width: 400px !important;
       background: transparent;
+
       &::placeholder {
-        color: white!important;
+        color: white !important;
       }
+
       :deep .el-input__prefix {
         color: white;
       }
     }
   }
+
   .ciel-header__collapse {
     height: 64px;
     line-height: 64px;
     flex: 1;
+
     .el-breadcrumb {
       margin-left: 20px;
+
       :deep .el-breadcrumb__inner {
         color: white !important;
       }
     }
+
     i {
       font-size: 30px;
       cursor: pointer;
     }
+
     p {
       margin-left: 20px;
       color: #606266;
     }
   }
+
   .ciel-header__user {
     padding-right: 50px;
+
     .el-dropdown {
       .el-dropdown-link {
         color: white;
       }
     }
+
     .top-bar__img {
       margin: 0 8px 0 5px;
       padding: 2px;
@@ -256,6 +254,7 @@ export default defineComponent({
       background-color: white;
     }
   }
+
   .ciel-header__quanping {
     cursor: pointer;
     margin-right: 24px;

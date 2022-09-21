@@ -4,31 +4,18 @@
     <el-col :span="6" style="height: calc(100vh - 130px) ">
       <basic-container class="role-wrap">
         <ul>
-          <li
-            @click="activeRoleIndex = 0"
-            class="role-title flexlayout flexlayout_middle"
-            :class="{ isActive: activeRoleIndex == 0 }"
-          >
+          <li @click="activeRoleIndex = 0" class="role-title flexlayout flexlayout_middle"
+            :class="{ isActive: activeRoleIndex == 0 }">
             <i class="el-icon-office-building"></i>全部角色
           </li>
-          <li
-            @click="activeRoleIndex = index + 1"
-            :class="{ isActive: activeRoleIndex == index + 1 }"
-            class="role-title flexlayout flexlayout_middle"
-            v-for="(item, index) in roleList"
-            :key="index"
-          >
+          <li @click="activeRoleIndex = index + 1" :class="{ isActive: activeRoleIndex == index + 1 }"
+            class="role-title flexlayout flexlayout_middle" v-for="(item, index) in roleList" :key="index">
             <p class="flexitem_auto">{{ item['roleName'] }}</p>
             <i @click.stop="editRole(item)" class="el-icon-edit-outline"></i>
             <i @click.stop="reqDeleteRole(item)" class="el-icon-delete"></i>
           </li>
           <li class="role-title">
-            <el-button
-              size="small"
-              type="primary"
-              @click="isShowRoleModel = true"
-              >新增角色</el-button
-            >
+            <el-button size="small" type="primary" @click="isShowRoleModel = true">新增角色</el-button>
           </li>
         </ul>
       </basic-container>
@@ -36,15 +23,9 @@
     <!-- 用户列表 -->
     <el-col :span="18">
       <basic-container>
-        <el-button size="small" type="primary" @click="isShowUserModel = true"
-          >+ 新 增 用 户</el-button
-        >
-        <basic-table
-          class="user-table"
-          :options="tableOptions"
-          :tableData="myData"
-        >
-          <template v-slot:operation="{row}">
+        <el-button size="small" type="primary" @click="isShowUserModel = true">+ 新 增 用 户</el-button>
+        <basic-table class="user-table" :options="tableOptions" :tableData="myData">
+          <template v-slot:operation="{ row }">
             <el-button type="text" @click="editUser(row)">编辑</el-button>
             <el-button type="text" @click="resDeleteUser(row.id)">删除</el-button>
           </template>
@@ -52,101 +33,44 @@
       </basic-container>
     </el-col>
     <!-- 用户新增或编辑 -->
-    <el-dialog
-      v-model="isShowUserModel"
-      title="新增用户"
-      width="30%"
-      append-to-body
-    >
-      <el-form
-        ref="userForm"
-        :model="userInfo"
-        :rules="userRules"
-        label-width="80px"
-      >
+    <el-dialog v-model="isShowUserModel" title="新增用户" width="30%" append-to-body>
+      <el-form ref="userForm" :model="userInfo" :rules="userRules" label-width="80px">
         <el-form-item label="用户名" prop="userName">
-          <el-input
-            placeholder="请输入用户名"
-            size="small"
-            v-model="userInfo.userName"
-          ></el-input>
+          <el-input placeholder="请输入用户名" size="small" v-model="userInfo.userName"></el-input>
         </el-form-item>
         <el-form-item label="账号名" prop="account">
-          <el-input
-            placeholder="请输入账号名"
-            size="small"
-            v-model="userInfo.account"
-          ></el-input>
+          <el-input placeholder="请输入账号名" size="small" v-model="userInfo.account"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input
-            placeholder="请输入密码"
-            size="small"
-            v-model="userInfo.password"
-          ></el-input>
+          <el-input placeholder="请输入密码" size="small" v-model="userInfo.password"></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="roleids">
           <!-- <el-input size="small" v-model="userInfo.roleids"></el-input> -->
-          <el-select
-            size="small"
-            style="width: 100%"
-            v-model="userInfo.roleids"
-            placeholder="请选择角色"
-          >
-            <el-option
-              v-for="item in roleList"
-              :key="`option${item['id']}`"
-              :label="item['roleName']"
-              :value="item['id']"
-            >
+          <el-select size="small" style="width: 100%" v-model="userInfo.roleids" placeholder="请选择角色">
+            <el-option v-for="item in roleList" :key="`option${item['id']}`" :label="item['roleName']"
+              :value="item['id']">
             </el-option>
           </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button size="small" @click="isShowUserModel = false"
-            >取 消</el-button
-          >
-          <el-button size="small" type="primary" @click="saveUserInfo"
-            >保 存</el-button
-          >
+          <el-button size="small" @click="isShowUserModel = false">取 消</el-button>
+          <el-button size="small" type="primary" @click="saveUserInfo">保 存</el-button>
         </span>
       </template>
     </el-dialog>
     <!-- 角色新增或编辑 -->
-    <el-dialog
-      v-model="isShowRoleModel"
-      title="新增角色"
-      width="30%"
-      append-to-body
-    >
+    <el-dialog v-model="isShowRoleModel" title="新增角色" width="30%" append-to-body>
       <div style="margin-bottom: 10px">角色名称:</div>
-      <el-input
-        size="small"
-        placeholder="请输入角色名称"
-        v-model="roleInfo.roleName"
-      ></el-input>
+      <el-input size="small" placeholder="请输入角色名称" v-model="roleInfo.roleName"></el-input>
       <div style="margin: 10px 0">菜单权限:</div>
-      <el-tree
-        :data="menuData"
-        show-checkbox
-        node-key="id"
-        ref="menuTree"
-        :props="treeMenuProp">
+      <el-tree :data="menuData" show-checkbox node-key="id" ref="menuTree" :props="treeMenuProp">
       </el-tree>
       <template #footer>
         <span class="dialog-footer">
-          <el-button size="small" @click="isShowUserModel = false"
-            >取 消</el-button
-          >
-          <el-button
-            size="small"
-            :loading="isloadingSave"
-            type="primary"
-            @click="saveRoleInfo"
-            >保 存</el-button
-          >
+          <el-button size="small" @click="isShowUserModel = false">取 消</el-button>
+          <el-button size="small" :loading="isloadingSave" type="primary" @click="saveRoleInfo">保 存</el-button>
         </span>
       </template>
     </el-dialog>
@@ -154,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, toRefs, Ref, ref } from "vue";
+import { defineComponent, onMounted, reactive, toRefs, Ref, ref, unref } from "vue";
 import BasicContainer from "../../components/basic-container/index.vue";
 import BasicTable from "../../components/basic-table/index.vue";
 import {
@@ -165,11 +89,12 @@ import {
   saveUser,
   deleteUser
 } from "../../api/user/index";
-import {reqMenuRoute} from '../../api/system/index'
+import { reqMenuRoute } from '../../api/system/index'
 import { ElMessage, ElMessageBox } from "element-plus";
 import { valideForm } from "../../utils/formUtils";
 import { encryptAES } from "../../utils/CryptyE";
-import {listToTree} from '../../utils/index';
+import { listToTree } from '../../utils/index';
+import { User, Role } from '../../type/user';
 export default defineComponent({
   components: {
     BasicContainer,
@@ -182,8 +107,19 @@ export default defineComponent({
       await reqRoleList();
       await requestUsers();
     });
+    // state
     const userForm: Ref = ref();
     const menuTree: Ref = ref();
+    const userInfo: Ref<User> = ref({
+      userName: "",
+      password: "",
+      account: "",
+      roleids: '',
+      id: ''
+    });
+    const roleInfo: Ref<Role> = ref(
+      { roleName: "", id: "" }
+    )
     const state = reactive({
       isloadingSave: false,
       tableOptions: {
@@ -210,13 +146,6 @@ export default defineComponent({
       },
       myData: [],
       isShowUserModel: false,
-      userInfo: {
-        userName: "",
-        password: "",
-        account: "",
-        roleids: '',
-        id: ''
-      },
       userRules: {
         userName: [
           { required: true, message: "请输入用户名", trigger: "blur" },
@@ -230,7 +159,6 @@ export default defineComponent({
       roleList: [], // 角色列表
       activeRoleIndex: 0, // 选中的角色列表
       isShowRoleModel: false, // 新增角色弹窗
-      roleInfo: { roleName: "", id: "" },
       treeMenuProp: { // 菜单树
         children: 'children',
         label: 'name'
@@ -239,15 +167,15 @@ export default defineComponent({
     });
     // 获取菜单
     const getMenuList = async () => {
-      const res =  await reqMenuRoute();
+      const res = await reqMenuRoute();
       let menuData = res.data.data || res.data || [];
-      state.menuData = listToTree(menuData,-1) || []
+      state.menuData = listToTree(menuData, -1) || []
     }
     // 获取用户列表
     const requestUsers = async () => {
       const { data } = await getUserList();
-      state.myData = data.map((item:any) => {
-        let list:any = state.roleList.find((i:any) => item.roleIds == i.id);
+      state.myData = data.map((item: any) => {
+        let list: any = state.roleList.find((i: any) => item.roleIds == i.id);
         return {
           ...list,
           ...item,
@@ -257,9 +185,9 @@ export default defineComponent({
     };
     // 保存角色信息
     const saveRoleInfo = async () => {
-      const { roleName, id } = state.roleInfo;
+      const { roleName, id } = unref(roleInfo);
       const roleMenus = menuTree.value.getCheckedKeys().join(',');
-      console.log('roleMenus',roleMenus)
+      console.log('roleMenus', roleMenus)
       if (!roleName) {
         ElMessage.error("请输入角色名称");
         return;
@@ -274,7 +202,7 @@ export default defineComponent({
         id: id,
         roleMenus
       });
-       ElMessage.success("保存成功");
+      ElMessage.success("保存成功");
       state.isloadingSave = false;
       state.isShowRoleModel = false;
       reqRoleList();
@@ -283,12 +211,12 @@ export default defineComponent({
     const reqRoleList = async () => {
       const { data } = await getRoleList();
       state.roleList = data.map(item => {
-        item.id = String(item.id);  
+        item.id = String(item.id);
         return item
       });
     };
     const reqDeleteRole = (item) => {
-      messageConfirm('删除角色后，该角色的菜单将会失效，确定删除该角色?',async () => {
+      messageConfirm('删除角色后，该角色的菜单将会失效，确定删除该角色?', async () => {
         await deleteRole({ id: item.id });
         ElMessage({
           type: "success",
@@ -298,7 +226,7 @@ export default defineComponent({
       })
     };
     // 提交确认提醒
-    const messageConfirm = (message,callback) => {
+    const messageConfirm = (message, callback) => {
       ElMessageBox.confirm(
         message,
         "温馨提示",
@@ -312,11 +240,11 @@ export default defineComponent({
       });
     }
     // 编辑角色
-    const editRole = (item) => {
-      state.roleInfo = Object.assign({}, item);
-      let menuIds = item.roleMenus.split(',')
+    const editRole = (item: Role) => {
+      roleInfo.value = Object.assign({}, item);
+      let menuIds = item.roleMenus ? item.roleMenus.split(',') : []
       state.isShowRoleModel = true;
-      setTimeout(() => {menuTree.value.setCheckedKeys(menuIds)})
+      setTimeout(() => { menuTree.value.setCheckedKeys(menuIds) })
     };
     // 保存用户
     const saveUserInfo = async () => {
@@ -325,25 +253,25 @@ export default defineComponent({
         return;
       }
       state.isloadingSave = true;
-      let params = Object.assign({}, state.userInfo);
-      if(!params.id && !params.password) {
+      let params = Object.assign({}, unref(userInfo));
+      if (!params.id && !params.password) {
         ElMessage.error("请输入密码以便登录");
         return
       }
-      // console.log('params',params)
-      // return;
-      if(params.password) {
+      if (params.password) {
         params.password = encryptAES(params.password, "998877001");
       }
+      console.log('params', params)
+      return;
       await saveUser(params);
       state.isloadingSave = false;
       state.isShowUserModel = false;
       requestUsers();
     };
     // 删除用户
-    const resDeleteUser = (id) => {
-      messageConfirm('删除用户后，用户将不能登录，确定删除该用户?',async () => {
-        await deleteUser({ id:id });
+    const resDeleteUser = (id: string | number) => {
+      messageConfirm('删除用户后，用户将不能登录，确定删除该用户?', async () => {
+        await deleteUser({ id: id });
         ElMessage({
           type: "success",
           message: "删除成功",
@@ -352,10 +280,10 @@ export default defineComponent({
       })
     };
     // 编辑用户
-    const editUser = (row) => {
-      state.userInfo = row;
-      state.userInfo.account = row.userAccount;
-      state.userInfo.roleids = row.roleIds;
+    const editUser = (row: User) => {
+      userInfo.value = row;
+      userInfo.value.account = row.userAccount;
+      userInfo.value.roleids = row.roleIds;
       state.isShowUserModel = true;
     }
     return {
@@ -364,10 +292,12 @@ export default defineComponent({
       editRole,
       reqDeleteRole,
       saveUserInfo,
+      userInfo,
       userForm,
       menuTree,
       resDeleteUser,
-      editUser
+      editUser,
+      roleInfo
     };
   },
 });
@@ -380,14 +310,17 @@ export default defineComponent({
     padding: 10px 20px;
     color: #333;
     cursor: pointer;
+
     & p {
       margin: 0;
     }
+
     & i {
       color: #409eff;
       font-size: 18px;
       padding-left: 10px;
     }
+
     &.isActive {
       color: #409eff;
       border-right: 2px solid #409eff;
@@ -395,8 +328,10 @@ export default defineComponent({
       font-weight: 500;
     }
   }
+
   padding: 0 !important;
 }
+
 .user-table {
   margin-top: 20px;
 }

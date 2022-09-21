@@ -4,9 +4,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "tsc": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@antv/g2": "^4.1.35",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
