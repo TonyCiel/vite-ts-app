@@ -78,6 +78,13 @@ const menus1 = [
         icon: 'el-icon-location-information',
         parentId: '03',
     },
+    {
+        name: '表格组件',
+        path: '/component/table',
+        id: '032',
+        icon: 'el-icon-c-scale-to-original',
+        parentId: '03',
+    },
 ]
 // const menus = [
 //     {

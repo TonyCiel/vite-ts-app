@@ -95,6 +95,7 @@ import { valideForm } from "../../utils/formUtils";
 import { encryptAES } from "../../utils/CryptyE";
 import { listToTree } from '../../utils/index';
 import { User, Role } from '../../type/user';
+import { SearchFormSizeEnum , TableInputTypeEnum } from '@/components/basic-table/index';
 export default defineComponent({
   components: {
     BasicContainer,
@@ -125,14 +126,20 @@ export default defineComponent({
       tableOptions: {
         border: true,
         selection: true,
+        searchFormSize: SearchFormSizeEnum.SMALL,
         column: [
           {
             label: "ID",
             prop: "id",
+            search: true,
+            type: TableInputTypeEnum.TEXT,
+            placeholder: '请输入ID',
           },
           {
             label: "用户名",
             prop: "userName",
+            search: true,
+            placeholder: '请输入用户名'
           },
           {
             label: "账号",
@@ -141,6 +148,18 @@ export default defineComponent({
           {
             label: "角色名称",
             prop: "roleName",
+            search: true,
+            type: TableInputTypeEnum.SELECT,
+            placeholder: '请选择角色名称',
+            filterable: true,
+            dicData: [{
+              label: '超级管理',
+              value: '0909'
+            },
+            {
+              label: '普通用户',
+              value: '0901'
+            }]
           },
         ],
       },

@@ -1,6 +1,6 @@
 export const homePage:string = "/wel/index"; // 首页路径
 export const AMapOptions: any = {
-  "key": "",              // 申请好的Web端开发者Key，首次调用 load 时必填
+  "key": "6407ffd6a71d7509c7ce9d3ceedef9dc",              // 申请好的Web端开发者Key，首次调用 load 时必填
     "version": "1.4.15",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
     "plugins": [],           // 需要使用的的插件列表，如比例尺'AMap.Scale'等
     "AMapUI": {             // 是否加载 AMapUI，缺省不加载
