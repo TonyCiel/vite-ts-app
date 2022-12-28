@@ -1,8 +1,8 @@
 <template>
-  <div v-loading="loading">
-    <HeaderSearch>
-      <template v-slot:searchSlot v-if="options.searchMenuSlot">
-        <slot name="searchMenu"></slot>
+  <div>
+    <HeaderSearch ref="headerSearch" @search-change="searchChange" :loading="loading">
+      <template v-slot:menuRight>
+        <slot name="menuRight"></slot>
       </template>
     </HeaderSearch>
     <el-table
@@ -12,6 +12,7 @@
       :maxHeight="400"
       :border="options.border"
       :data="tableData"
+      v-loading="loading"
     >
       <el-table-column
         align="center"
@@ -39,6 +40,7 @@
       <el-table-column
         align="center"
         label="操作"
+        fixed="right"
         v-if="!options.operationHide"
       >
         <template #default="scope">
@@ -194,6 +196,12 @@ export default defineComponent({
         });
       return label;
     };
+    /**
+     * 查询
+     */
+    const searchChange = (query: any) => {
+      emit('search-change',query);
+    };
     return {
       privide,
       handleSelectionChange,
@@ -203,6 +211,7 @@ export default defineComponent({
       handleCurrentChange,
       defaultPage,
       updatePageValue,
+      searchChange,
     };
   },
 });

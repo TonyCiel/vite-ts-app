@@ -12,6 +12,7 @@ const config = {
   resolve: {
     alias: {
       '/@': pathResolve('./src'),
+      '@': pathResolve('./src'),
     },
     // extensions: ['.js', '.vue', '.json', ".scss"],
   },
@@ -21,7 +22,7 @@ const config = {
   minify: 'esbuild',//构建时的压缩方式
   optimizeDeps: { // 引入的第三方配置
     include: [
-      'vue',
+      // 'vue',
       'vue-router',
       'element-plus',
       'vuex',
@@ -41,7 +42,8 @@ const config = {
     ssr: false,//是否服务端渲染
     proxy: {//代理配置
       '/api': {
-        target: 'http://localhost/',
+        target: 'http://localhost:32334',
+        // target: 'http://47.101.59.21:8080',
         changeOrigin: true,
         ws: true,
         pathRewrite: {

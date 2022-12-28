@@ -4,6 +4,7 @@
     <cielMenu></cielMenu>
     <cielTop></cielTop>
     <cielTags></cielTags>
+    <!-- <BasicLoading></BasicLoading> -->
     <div class="ciel-page-content">
       <router-view />
     </div>
@@ -17,7 +18,7 @@ import cielTop from "./top/index.vue";
 import cielTags from "./tags/index.vue";
 import useBasicHook from '../hooks/basic';
 import { getRoutes } from '../router/views'
-import routeObj from '../router/index'
+import routeObj from '../router/index';
 export default defineComponent({
   // provide: [isCollapse]
   components: {

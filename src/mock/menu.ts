@@ -85,6 +85,20 @@ const menus1 = [
         icon: 'el-icon-c-scale-to-original',
         parentId: '03',
     },
+    {
+        name: '功能案例',
+        path: '/case',
+        id: '04',
+        icon: 'el-icon-collection',
+        parentId: -1,
+    },
+    {
+        name: 'spu问题',
+        path: '/case/shoppingCart',
+        id: '041',
+        icon: 'el-icon-goods',
+        parentId: '04',
+    },
 ]
 // const menus = [
 //     {

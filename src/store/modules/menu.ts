@@ -14,6 +14,7 @@ const memu = {
             return new Promise(resolve => {
                 reqMenuRoute().then(res => {
                     let routes = res.data.data || res.data || getStore('menu') || [];
+                    console.log('返回的 routes')
                     let user:any = getStore('userInfo');
                     if (user) {
                         let roleMenus=  user.roleMenus || '';

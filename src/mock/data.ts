@@ -1,181 +1,855 @@
-import Mock from 'mockjs';
+import Mock from "mockjs";
+/**
+ * 首页数据
+ */
 const data = [
-    {
-        day: "2021-11-21",
-        value: 20,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-22",
-        value: 23,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-23",
-        value: 28,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-24",
-        value: 0,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-25",
-        value: 18,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-26",
-        value: 10,
-        key: 'allUser'
-      },
-      {
-        day: "2021-11-21",
-        value: 8,
-        key: 'createUser'
-      },
-      {
-        day: "2021-11-22",
-        value: 2,
-        key: 'createUser'
-      },
-      {
-        day: "2021-11-23",
-        value: 4,
-        key: 'createUser'
-      },
-      {
-        day: "2021-11-24",
-        value: 9,
-        key: 'createUser'
-      },
-      {
-        day: "2021-11-25",
-        value: 3,
-        key: 'createUser'
-      },
-      {
-        day: "2021-11-26",
-        value: 1,
-        key: 'createUser'
-      },
+  {
+    day: "2021-11-21",
+    value: 20,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-22",
+    value: 23,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-23",
+    value: 28,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-24",
+    value: 0,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-25",
+    value: 18,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-26",
+    value: 10,
+    key: "allUser",
+  },
+  {
+    day: "2021-11-21",
+    value: 8,
+    key: "createUser",
+  },
+  {
+    day: "2021-11-22",
+    value: 2,
+    key: "createUser",
+  },
+  {
+    day: "2021-11-23",
+    value: 4,
+    key: "createUser",
+  },
+  {
+    day: "2021-11-24",
+    value: 9,
+    key: "createUser",
+  },
+  {
+    day: "2021-11-25",
+    value: 3,
+    key: "createUser",
+  },
+  {
+    day: "2021-11-26",
+    value: 1,
+    key: "createUser",
+  },
 
-      {
-        day: "2021-11-21",
-        value: 1,
-        key: 'loseUser'
-      },
-      {
-        day: "2021-11-22",
-        value: 0,
-        key: 'loseUser'
-      },
-      {
-        day: "2021-11-23",
-        value: 1,
-        key: 'loseUser'
-      },
-      {
-        day: "2021-11-24",
-        value: 2,
-        key: 'loseUser'
-      },
-      {
-        day: "2021-11-25",
-        value: 0,
-        key: 'loseUser'
-      },
-      {
-        day: "2021-11-26",
-        value: 1,
-        key: 'loseUser'
-      },
+  {
+    day: "2021-11-21",
+    value: 1,
+    key: "loseUser",
+  },
+  {
+    day: "2021-11-22",
+    value: 0,
+    key: "loseUser",
+  },
+  {
+    day: "2021-11-23",
+    value: 1,
+    key: "loseUser",
+  },
+  {
+    day: "2021-11-24",
+    value: 2,
+    key: "loseUser",
+  },
+  {
+    day: "2021-11-25",
+    value: 0,
+    key: "loseUser",
+  },
+  {
+    day: "2021-11-26",
+    value: 1,
+    key: "loseUser",
+  },
 
-      {
-        day: "2021-11-21",
-        value: 1,
-        key: 'pureUser'
-      },
-      {
-        day: "2021-11-22",
-        value: 3,
-        key: 'pureUser'
-      },
-      {
-        day: "2021-11-23",
-        value: 6,
-        key: 'pureUser'
-      },
-      {
-        day: "2021-11-24",
-        value: 9,
-        key: 'pureUser'
-      },
-      {
-        day: "2021-11-25",
-        value: 10,
-        key: 'pureUser'
-      },
-      {
-        day: "2021-11-26",
-        value: 14,
-        key: 'pureUser'
-      },
-]
-const tableData = [{
-  "spuId": "8995198453527177024",
-  "spuTitle": "选品商品支付中心测试",
-  "linePrice": "89.99",
-  "minPrice": "0.01",
-  "maxPrice": "0.01",
-  "payMethod": 1
-}, {
-  "spuId": "8993492251999037202",
-  "spuTitle": "腾讯视频会员年卡/季卡/月卡",
-  "linePrice": "100.00",
-  "minPrice": "0.01",
-  "maxPrice": "0.01",
-  "payMethod": 3
-}, {
-  "spuId": "5679972196132612816",
-  "spuTitle": "权益中心测试用品",
-  "linePrice": "9.99",
-  "minPrice": "0.01",
-  "maxPrice": "0.01",
-  "payMethod": 2
-}, {
-  "spuId": "8995198453527177034",
-  "spuTitle": "对账中心",
-  "linePrice": "0.01",
-  "minPrice": "0.01",
-  "maxPrice": "0.01",
-  "payMethod": 3
-}, {
-  "spuId": "1600594570567283380",
-  "spuTitle": "多规格测试0421",
-  "linePrice": "666.00",
-  "minPrice": "0.01",
-  "maxPrice": "0.04",
-  "payMethod": 1
-}, {
-  "spuId": "5679972196132612804",
-  "spuTitle": "权益中心测试用礼品",
-  "linePrice": "0.01",
-  "minPrice": "0.01",
-  "maxPrice": "0.01",
-  "payMethod": 2
-}];
-Mock.mock('/mock/getIndexData',
-    'get',
-    {
-        data: data,
-    }
-)
+  {
+    day: "2021-11-21",
+    value: 1,
+    key: "pureUser",
+  },
+  {
+    day: "2021-11-22",
+    value: 3,
+    key: "pureUser",
+  },
+  {
+    day: "2021-11-23",
+    value: 6,
+    key: "pureUser",
+  },
+  {
+    day: "2021-11-24",
+    value: 9,
+    key: "pureUser",
+  },
+  {
+    day: "2021-11-25",
+    value: 10,
+    key: "pureUser",
+  },
+  {
+    day: "2021-11-26",
+    value: 14,
+    key: "pureUser",
+  },
+];
+/**
+ * 测试表格数据
+ */
+const tableData = [
+  {
+    spuId: "8995198453527177024",
+    spuTitle: "选品商品支付中心测试",
+    linePrice: "89.99",
+    minPrice: "0.01",
+    maxPrice: "0.01",
+    payMethod: 1,
+    date: "2021-11-09 12:00:02",
+  },
+  {
+    spuId: "8993492251999037202",
+    spuTitle: "腾讯视频会员年卡/季卡/月卡",
+    linePrice: "100.00",
+    minPrice: "0.01",
+    maxPrice: "0.01",
+    payMethod: 3,
+    date: "2021-11-12 11:01:10",
+  },
+  {
+    spuId: "5679972196132612816",
+    spuTitle: "权益中心测试用品",
+    linePrice: "9.99",
+    minPrice: "0.01",
+    maxPrice: "0.01",
+    payMethod: 2,
+  },
+  {
+    spuId: "8995198453527177034",
+    spuTitle: "对账中心",
+    linePrice: "0.01",
+    minPrice: "0.01",
+    maxPrice: "0.01",
+    payMethod: 3,
+  },
+  {
+    spuId: "1600594570567283380",
+    spuTitle: "多规格测试0421",
+    linePrice: "666.00",
+    minPrice: "0.01",
+    maxPrice: "0.04",
+    payMethod: 1,
+  },
+  {
+    spuId: "5679972196132612804",
+    spuTitle: "权益中心测试用礼品",
+    linePrice: "0.01",
+    minPrice: "0.01",
+    maxPrice: "0.01",
+    payMethod: 2,
+  },
+];
 
-Mock.mock('/mock/getTableData',
-    'get',
-    {
-        data: tableData,
-    }
-)
+/**
+ * 购物车商品数据
+ */
+const shoppingCartData =  [
+  {
+    skuInfoVO: {
+      skuId: "1775875415328471042",
+      stocks: 0,
+      skuCode: "sss",
+      cash: "10",
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471042",
+      properties: [
+        {
+          skuPropertyId: 410,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "L码",
+          parentSort: 0,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 411,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "红色",
+          parentSort: 1,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471044",
+      stockId: null,
+      stocks: 1,
+      cash: "11",
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471044",
+      properties: [
+        {
+          skuPropertyId: 412,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "L码",
+          parentSort: 0,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 413,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "绿色",
+          parentSort: 1,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471046",
+      stockId: null,
+      stocks: 2,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "12",
+      cashLong: 1200,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmPCAI2hsAAAK-m7ZYbI838.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471046",
+      properties: [
+        {
+          skuPropertyId: 414,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "L码",
+          parentSort: 0,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 415,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "黄色",
+          parentSort: 1,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471048",
+      stockId: null,
+      stocks: 4,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "20",
+      cashLong: 2000,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmPeALdxDAAAK-m7ZYbI934.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471048",
+      properties: [
+        {
+          skuPropertyId: 416,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "M码",
+          parentSort: 0,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 417,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "红色",
+          parentSort: 1,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471050",
+      stockId: null,
+      stocks: 8,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "21",
+      cashLong: 2100,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmP-APPqOAAAVjQZZVH0666.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471050",
+      properties: [
+        {
+          skuPropertyId: 418,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "M码",
+          parentSort: 0,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 419,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "绿色",
+          parentSort: 1,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471052",
+      stockId: null,
+      stocks: 9,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "22",
+      cashLong: 2200,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmRqAL1vLAAAVjQZZVH0181.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471052",
+      properties: [
+        {
+          skuPropertyId: 420,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "M码",
+          parentSort: 0,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 421,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "黄色",
+          parentSort: 1,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471054",
+      stockId: null,
+      stocks: 1,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "30",
+      cashLong: 3000,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmROAXyhSAAAVjQZZVH0560.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471054",
+      properties: [
+        {
+          skuPropertyId: 422,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "S码",
+          parentSort: 0,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 423,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "红色",
+          parentSort: 1,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471056",
+      stockId: null,
+      stocks: 9,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "31",
+      cashLong: 3100,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmSGAcTp9AAAK-m7ZYbI433.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471056",
+      properties: [
+        {
+          skuPropertyId: 424,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "S码",
+          parentSort: 0,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 425,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "绿色",
+          parentSort: 1,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471058",
+      stockId: null,
+      stocks: 10,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "32",
+      cashLong: 3200,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmSaACGgpAAAVjQZZVH0566.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471058",
+      properties: [
+        {
+          skuPropertyId: 426,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "S码",
+          parentSort: 0,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 427,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "黄色",
+          parentSort: 1,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471060",
+      stockId: null,
+      stocks: 8,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "40",
+      cashLong: 4000,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmSyACJzlAAAVjQZZVH0306.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471060",
+      properties: [
+        {
+          skuPropertyId: 428,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "XS码",
+          parentSort: 0,
+          sort: 3,
+        },
+        {
+          skuPropertyId: 429,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "红色",
+          parentSort: 1,
+          sort: 0,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471062",
+      stockId: null,
+      stocks: null,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "41",
+      cashLong: 4100,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmTGARa0FAAAK-m7ZYbI660.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471062",
+      properties: [
+        {
+          skuPropertyId: 430,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "XS码",
+          parentSort: 0,
+          sort: 3,
+        },
+        {
+          skuPropertyId: 431,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "绿色",
+          parentSort: 1,
+          sort: 1,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "200元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+  {
+    skuInfoVO: {
+      operSkuId: null,
+      skuId: "1775875415328471064",
+      stockId: null,
+      stocks: null,
+      surplusStock: null,
+      stocksStatus: null,
+      skuCode: "sss",
+      cash: "42",
+      cashLong: 4200,
+      points: null,
+      linePrice: "100",
+      linePriceLong: 10000,
+      purchasePrice: null,
+      purchasePriceLong: null,
+      previewImg: "/image/M00/00/1A/CqQKLmOSmTeARv87AAAVjQZZVH0133.png",
+      taxCode: null,
+      taxRate: null,
+      yards69: null,
+      md5: null,
+      supplierSkuCode: null,
+      supplierSpu: null,
+      supplierId: 1,
+      costPrice: null,
+      tenantId: 1,
+      propertyNameList: null,
+    },
+    skuPropertyVO: {
+      skuId: "1775875415328471064",
+      properties: [
+        {
+          skuPropertyId: 432,
+          propertyType: 3,
+          propertyTypeName: "尺寸",
+          propertyName: "XS码",
+          parentSort: 0,
+          sort: 3,
+        },
+        {
+          skuPropertyId: 433,
+          propertyType: 1,
+          propertyTypeName: "颜色",
+          propertyName: "黄色",
+          parentSort: 1,
+          sort: 2,
+        },
+        {
+          skuPropertyId: 414,
+          propertyType: 1,
+          propertyTypeName: "保险",
+          propertyName: "100元",
+          parentSort: 1,
+          sort: 1,
+        },
+      ],
+    },
+  },
+];
+Mock.mock("/mock/getIndexData", "get", {
+  data: data,
+});
+
+Mock.mock("/mock/getTableData", "get", {
+  data: tableData,
+});
+
+Mock.mock("/mock/getShoppingCartData", "get", {
+  data: shoppingCartData,
+});

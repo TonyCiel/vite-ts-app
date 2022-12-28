@@ -6,10 +6,16 @@
       :table-data="tableData"
       v-model:page="pageOptions"
       @on-load="initTableData"
+      @search-change="initTableData"
     >
-      <!-- <template v-slot:payMethod>
-11111
-    </template> -->
+      <template v-slot:operation>
+        <el-button type="text">删除</el-button>
+      </template>
+      <template v-slot:menuRight>
+        <el-button type="primary" size="small" @click="openLoading"
+          >自定义按钮</el-button
+        >
+      </template>
     </basic-table>
   </basic-container>
 </template>
@@ -19,6 +25,7 @@ import { defineComponent, onMounted, ref, Ref } from "vue";
 import { getTableData } from "@/api/component/index";
 import BasicTable from "@/components/basic-table/index.vue";
 import BasicContainer from "@/components/basic-container/index.vue";
+import useBasicLoading from "@/hooks/useBasicLoading";
 import {
   SearchFormSizeEnum,
   TableInputTypeEnum,
@@ -31,6 +38,7 @@ export default defineComponent({
     BasicContainer,
   },
   setup() {
+    const basicLoading = useBasicLoading();
     onMounted(() => {
       initTableData();
     });
@@ -42,13 +50,12 @@ export default defineComponent({
       total: 0,
       currentPage: 1,
       pageSizes: [10, 20, 30, 40, 50],
-      layout: 'sizes, prev, pager, next'
+      layout: "sizes, prev, pager, next",
     });
     const tableOptions: Ref<BasicTableOption> = ref({
       border: true,
       selection: false,
       searchFormSize: SearchFormSizeEnum.SMALL,
-      operationHide: true,
       column: [
         {
           label: "ID",
@@ -84,8 +91,9 @@ export default defineComponent({
           type: TableInputTypeEnum.DATETIME,
           placeholder: "请选择时间",
           search: true,
-          valueFormat: 'yyyy-MM-dd HH:mm:ss',
-          format: 'yyyy/MM/dd HH:mm:ss'
+          valueFormat: "YYYY-MM-DD hh:mm:ss",
+          format: "YYYY/MM/DD hh:mm:ss",
+          width: 200,
         },
         {
           // slot: true,
@@ -113,25 +121,27 @@ export default defineComponent({
       ],
     });
     // methods
-    const initTableData = () => {
+    const initTableData = async (query?: any) => {
+      console.log("查询参数", query);
       isLoading.value = true;
-      console.log('aaaaa',pageOptions.value)
-      setTimeout(async () => {
-        const {
-          data: { data },
-        } = await getTableData();
-        tableData.value = data;
-        isLoading.value = false;
-        pageOptions.value.total = 900
-        console.log("res", data);
-      }, 2000);
+      const { data } = await getTableData();
+      console.log("data", data);
+      let records = data instanceof Array ? data : data.data;
+      tableData.value = records;
+      isLoading.value = false;
+      pageOptions.value.total = records.length;
     };
+    const openLoading = () => {
+      basicLoading.showLoading("加载哈哈哈...");
+    };
+
     return {
       initTableData,
       tableOptions,
       tableData,
       isLoading,
       pageOptions,
+      openLoading,
     };
   },
 });
