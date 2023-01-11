@@ -99,6 +99,13 @@ const menus1 = [
         icon: 'el-icon-goods',
         parentId: '04',
     },
+    {
+        name: '组件拖拽',
+        path: '/case/componentPage',
+        id: '042',
+        icon: 'el-icon-edit',
+        parentId: '04',
+    },
 ]
 // const menus = [
 //     {

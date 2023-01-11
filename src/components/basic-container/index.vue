@@ -24,7 +24,7 @@ export default defineComponent({
     margin: 10px;
     border-radius: 2px;
     background-color: #fff;
-    height: 100%;
+    // height: 100%;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.03);
     .basic-container__title {
         font-size: 16px;
