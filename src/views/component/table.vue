@@ -12,7 +12,10 @@
         <el-button type="text">删除</el-button>
       </template>
       <template v-slot:menuRight>
-        <el-button type="primary" size="small" @click="openLoading"
+        <el-button
+          type="primary"
+          size="small"
+          @click="showLoading('加载哈哈哈...')"
           >自定义按钮</el-button
         >
       </template>
@@ -21,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, Ref } from "vue";
+import { defineComponent, onMounted, ref, Ref , watch} from "vue";
 import { getTableData } from "@/api/component/index";
 import BasicTable from "@/components/basic-table/index.vue";
 import BasicContainer from "@/components/basic-container/index.vue";
@@ -38,7 +41,7 @@ export default defineComponent({
     BasicContainer,
   },
   setup() {
-    const basicLoading = useBasicLoading();
+    const { showLoading } = useBasicLoading();
     onMounted(() => {
       initTableData();
     });
@@ -131,17 +134,13 @@ export default defineComponent({
       isLoading.value = false;
       pageOptions.value.total = records.length;
     };
-    const openLoading = () => {
-      basicLoading.showLoading("加载哈哈哈...");
-    };
-
     return {
       initTableData,
       tableOptions,
       tableData,
       isLoading,
       pageOptions,
-      openLoading,
+      showLoading,
     };
   },
 });

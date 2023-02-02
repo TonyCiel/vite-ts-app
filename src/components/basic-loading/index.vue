@@ -19,10 +19,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const basicLoading = useBasicLoading();
-    const hideLoading = () => {
-      basicLoading.hideLoading();
-    };
+    const { hideLoading  } = useBasicLoading();
     return {
       hideLoading,
     };

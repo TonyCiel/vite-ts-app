@@ -108,6 +108,9 @@ export default defineComponent({
      */
     const cloneData = (origin: Component) => {
       let data = deepClone(origin);
+      // 随机生成一个id
+      data.vid = `_vid_right_${new Date().getTime()}`;
+      console.log('复制出来', data)
       return data;
     };
     /**
@@ -116,7 +119,7 @@ export default defineComponent({
      */
     const checkElement = (element: Component) => {
       cloneComponents.value = cloneComponents.value.map((item: Component) => {
-        item.isActive = item.name === element.name;
+        item.isActive = item.vid === element.vid;
         return item;
       });
     };
